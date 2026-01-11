@@ -7,54 +7,65 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Inter:wght@400;700;900&display=swap');
 
-        /* ESTILO GENERAL */
+        /* CONFIGURACIÓN BASE */
         body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; text-transform: uppercase; overflow-x: hidden; }
+        
         .announcement { background: #fff; color: #000; font-size: 0.6rem; padding: 10px; font-weight: 900; letter-spacing: 2px; text-align: center; position: sticky; top: 0; z-index: 1000; }
 
-        /* SECCIÓN 1: IMPACTO (HERO) */
-        .hero { height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; border-bottom: 1px solid #111; }
-        .hero h1 { font-family: 'UnifrakturMaguntia', serif; font-size: 6rem; margin: 0; line-height: 0.8; }
-        .hero p { letter-spacing: 12px; font-size: 0.6rem; color: #666; margin-top: 15px; }
+        /* SECCIÓN DE IMPACTO */
+        .hero { height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; border-bottom: 1px solid #111; }
+        .hero h1 { font-family: 'UnifrakturMaguntia', serif; font-size: clamp(4rem, 15vw, 7rem); margin: 0; line-height: 0.8; }
+        .hero p { letter-spacing: 10px; font-size: 0.6rem; color: #555; margin-top: 15px; }
 
-        /* NAVEGACIÓN ENTRE PRENDAS Y DISEÑOS */
+        /* MENÚ DE NAVEGACIÓN */
         .nav-tabs { display: flex; justify-content: center; gap: 40px; padding: 25px 0; background: #000; border-bottom: 1px solid #111; position: sticky; top: 35px; z-index: 900; }
         .tab-item { cursor: pointer; font-weight: 900; font-size: 0.7rem; letter-spacing: 2px; color: #444; transition: 0.3s; }
         .tab-item.active { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 5px; }
 
-        /* CONTENEDOR PRINCIPAL */
         .container { padding: 20px 10px; max-width: 1200px; margin: 0 auto; }
 
-        /* GRID DE PRODUCTOS (LAS 5 PRENDAS) */
-        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .product-card { background: #0a0a0a; border: 1px solid #1a1a1a; cursor: pointer; }
-        .product-card img { width: 100%; display: block; aspect-ratio: 1/1.2; object-fit: cover; }
-        .card-info { padding: 15px; text-align: center; font-size: 0.8rem; font-weight: 900; }
+        /* GRID CORREGIDA: FOTOS COMPLETAS */
+        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .product-card { background: #000; cursor: pointer; display: flex; flex-direction: column; }
+        
+        .product-card img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+            object-fit: contain; /* Esto evita que se corten las imágenes */
+        }
+        
+        .card-info { padding: 15px 5px; text-align: center; font-size: 0.8rem; font-weight: 900; letter-spacing: 1px; }
 
-        /* SECCIÓN DE DISEÑOS DIGITALES */
-        #section-diseños { display: none; padding-top: 40px; }
-        .digital-box { background: #0a0a0a; border: 2px dashed #333; padding: 50px 20px; text-align: center; border-radius: 12px; max-width: 400px; margin: 0 auto; }
-        .digital-icon { font-size: 4rem; margin-bottom: 20px; display: block; }
+        /* SECCIÓN DISEÑOS */
+        #section-diseños { display: none; padding: 40px 0; }
+        .digital-card { 
+            background: #0a0a0a; 
+            border: 1px solid #222; 
+            max-width: 400px; 
+            margin: 0 auto; 
+            border-radius: 10px; 
+            overflow: hidden; 
+        }
+        .digital-header { background: #111; padding: 40px 20px; text-align: center; border-bottom: 1px solid #222; }
+        .digital-body { padding: 30px 20px; }
 
         /* MODAL */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; z-index: 2000; overflow-y: auto; }
-        .modal-content { padding: 20px; max-width: 500px; margin: 0 auto; padding-bottom: 80px; }
+        .modal-content { padding: 20px; max-width: 500px; margin: 0 auto; padding-bottom: 100px; }
         .close-modal { position: fixed; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; z-index: 2100; color: #fff; }
-        .modal-img { width: 100%; border-radius: 4px; margin-bottom: 20px; }
+        .modal-img { width: 100%; height: auto; object-fit: contain; border-radius: 4px; margin-bottom: 20px; }
         
         /* BOTONES */
-        .btn-bbva { background: #004481; color: #fff; border: none; width: 100%; padding: 20px; font-weight: 900; border-radius: 8px; cursor: pointer; display: block; text-decoration: none; text-align: center; margin-bottom: 15px; }
-        .btn-wa { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 15px; font-weight: 900; border-radius: 8px; cursor: pointer; width: 100%; }
-
-        /* TABLA MEDIDAS */
-        .size-table { width: 100%; font-size: 0.7rem; border-collapse: collapse; margin: 20px 0; }
-        .size-table td { padding: 8px 0; border-bottom: 1px solid #111; color: #888; }
+        .btn-bbva { background: #004481; color: #fff; border: none; width: 100%; padding: 20px; font-weight: 900; border-radius: 8px; cursor: pointer; display: block; text-decoration: none; text-align: center; margin-bottom: 15px; font-size: 0.9rem; }
+        .btn-wa { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 15px; font-weight: 900; border-radius: 8px; cursor: pointer; font-size: 0.7rem; }
 
         footer { padding: 60px 20px; text-align: center; color: #222; font-size: 0.6rem; letter-spacing: 3px; }
     </style>
 </head>
 <body>
 
-    <div class="announcement">ENVÍOS A TODO MÉXICO — PACKS DIGITALES DISPONIBLES</div>
+    <div class="announcement">ENVÍOS NACIONALES — DIGITAL ASSETS DISPONIBLES</div>
 
     <section class="hero">
         <div>
@@ -93,16 +104,19 @@
         </div>
 
         <div id="section-diseños">
-            <div class="digital-box">
-                <span class="digital-icon">📂</span>
-                <h2 style="margin: 0;">GRAX VOL. 1</h2>
-                <p style="font-size: 0.6rem; color: #666; margin: 20px 0; line-height: 1.8;">
-                    10 GRÁFICOS STREETWEAR <br>
-                    FORMATOS: PNG + VECTOR (AI)<br>
-                    LISTOS PARA IMPRESIÓN
-                </p>
-                <div style="font-size: 1.8rem; font-weight: 900; margin-bottom: 25px;">$200.00 MXN</div>
-                <a href="#" class="btn-bbva">COMPRAR PACK DIGITAL</a>
+            <div class="digital-card">
+                <div class="digital-header">
+                    <div style="font-family: 'UnifrakturMaguntia'; font-size: 2.5rem;">Grax Vol. 1</div>
+                    <p style="font-size: 0.5rem; letter-spacing: 4px; color: #666;">ASSET PACK DIGITAL</p>
+                </div>
+                <div class="digital-body">
+                    <p style="font-size: 0.65rem; color: #888; line-height: 1.6; margin-bottom: 20px;">
+                        INCLUYE 10 GRÁFICOS STREETWEAR EN ALTA RESOLUCIÓN (PNG + VECTOR). LISTOS PARA DTF Y SERIGRAFÍA.
+                    </p>
+                    <div style="font-size: 1.5rem; font-weight: 900; margin-bottom: 25px;">$200.00 MXN</div>
+                    <a href="#" class="btn-bbva">COMPRAR PACK</a>
+                    <p style="font-size: 0.5rem; color: #333; text-align: center; margin-top: 10px;">ENVÍO INMEDIATO VÍA EMAIL</p>
+                </div>
             </div>
         </div>
     </div>
@@ -111,17 +125,11 @@
         <span class="close-modal" onclick="closeProduct()">&times;</span>
         <div class="modal-content">
             <img id="modalImg" class="modal-img" src="">
-            <div style="font-size: 0.6rem; color: #ffcc00; margin-bottom: 10px;">★★★★★ 5.0</div>
             <h2 style="margin: 0; font-size: 1.5rem;">PREMIUM OVERSIZE TEE</h2>
             <div style="font-size: 1.8rem; font-weight: 900; margin: 15px 0;">$450.00 MXN</div>
-
-            <table class="size-table">
-                <tr><td>TALLA CH</td><td>55 CM ANCHO / 72 CM LARGO</td></tr>
-                <tr><td>TALLA M</td><td>58 CM ANCHO / 75 CM LARGO</td></tr>
-                <tr><td>TALLA G</td><td>61 CM ANCHO / 78 CM LARGO</td></tr>
-            </table>
-
-            <select id="talla" style="width: 100%; background: #111; color: #fff; padding: 15px; border: 1px solid #222; margin-bottom: 20px;">
+            
+            <p style="font-size: 0.6rem; color: #555;">SELECCIONA TALLA:</p>
+            <select id="talla" style="width: 100%; background: #111; color: #fff; padding: 15px; border: 1px solid #333; margin-bottom: 20px;">
                 <option>CHICA (S)</option>
                 <option>MEDIANA (M)</option>
                 <option>GRANDE (G)</option>
@@ -129,11 +137,11 @@
             </select>
 
             <a href="#" class="btn-bbva">PAGAR CON BBVA</a>
-            <button class="btn-wa" onclick="enviarWA()">CONSULTAR POR WHATSAPP</button>
+            <button class="btn-wa" onclick="enviarWA()">WHATSAPP</button>
         </div>
     </div>
 
-    <footer>GRAX ESTUDIO © 2026 — CANCÚN</footer>
+    <footer>GRAX ESTUDIO © 2026</footer>
 
     <script>
         function showCategory(cat) {
@@ -141,17 +149,12 @@
             const d = document.getElementById('section-diseños');
             const tp = document.getElementById('tab-prendas');
             const td = document.getElementById('tab-diseños');
-
             if(cat === 'prendas') {
-                p.style.display = 'grid';
-                d.style.display = 'none';
-                tp.classList.add('active');
-                td.classList.remove('active');
+                p.style.display = 'grid'; d.style.display = 'none';
+                tp.classList.add('active'); td.classList.remove('active');
             } else {
-                p.style.display = 'none';
-                d.style.display = 'block';
-                tp.classList.remove('active');
-                td.classList.add('active');
+                p.style.display = 'none'; d.style.display = 'block';
+                tp.classList.remove('active'); td.classList.add('active');
             }
         }
 
