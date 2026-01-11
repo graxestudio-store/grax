@@ -6,113 +6,80 @@
     <title>GRAX | PREMIUM STORE</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Inter:wght@400;700;900&display=swap');
-
         body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; text-transform: uppercase; overflow-x: hidden; }
-        
         .announcement { background: #fff; color: #000; font-size: 0.65rem; padding: 12px; font-weight: 900; letter-spacing: 2px; text-align: center; position: sticky; top: 0; z-index: 100; }
-
         .brand-banner { padding: 40px 20px; text-align: center; border-bottom: 1px solid #111; }
         .brand-banner h1 { font-family: 'UnifrakturMaguntia', serif; font-size: 5rem; margin: 0; line-height: 1; }
-
         .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 10px; }
-        .product-card { background: #111; border: 1px solid #222; cursor: pointer; transition: 0.3s; }
+        .product-card { background: #111; border: 1px solid #222; cursor: pointer; transition: 0.3s; position: relative; }
         .product-card img { width: 100%; display: block; aspect-ratio: 1/1.2; object-fit: cover; }
-        .price-tag { color: #fff; font-weight: 900; padding: 15px; text-align: center; font-size: 0.9rem; }
-
-        /* MODAL PROFESIONAL */
+        .price-tag { color: #fff; font-weight: 900; padding: 10px; text-align: center; font-size: 0.8rem; letter-spacing: 1px; }
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; z-index: 2000; overflow-y: auto; }
-        .modal-content { padding: 30px 20px; max-width: 500px; margin: 0 auto; text-align: left; }
-        .close-modal { position: fixed; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; z-index: 2100; }
-        
-        .modal-img { width: 100%; border-radius: 2px; margin-bottom: 20px; }
-        .product-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 5px; }
-        .product-desc { font-size: 0.7rem; color: #888; letter-spacing: 1px; margin-bottom: 20px; }
-        .modal-price { font-size: 2rem; font-weight: 900; margin-bottom: 25px; }
-
-        /* CONTROLES DE COMPRA */
-        .qty-selector { display: flex; align-items: center; border: 1px solid #333; width: fit-content; margin-bottom: 30px; }
-        .qty-btn { background: none; border: none; color: #fff; padding: 15px 20px; cursor: pointer; font-size: 1.2rem; }
-        .qty-input { background: none; border: none; color: #fff; width: 40px; text-align: center; font-weight: 900; font-size: 1rem; }
-
-        .buy-btn { background: #fff; color: #000; border: none; width: 100%; padding: 20px; font-weight: 900; font-size: 1rem; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; text-decoration: none; display: block; text-align: center; margin-bottom: 15px; }
-        .checkout-btn { background: #5865f2; color: #fff; border: none; width: 100%; padding: 20px; font-weight: 900; font-size: 1rem; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; text-decoration: none; display: block; text-align: center; }
-
-        .whatsapp-float { position: fixed; bottom: 25px; right: 25px; background: #25d366; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 3000; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .modal-content { padding: 20px; text-align: center; max-width: 600px; margin: 0 auto; }
+        .close-modal { position: fixed; top: 20px; right: 20px; font-size: 2.5rem; cursor: pointer; color: #fff; font-weight: bold; z-index: 2100; background: rgba(0,0,0,0.5); border-radius: 50%; width: 50px; height: 50px; line-height: 45px; }
+        .modal-img { width: 100%; border-radius: 5px; margin-top: 40px; }
+        .modal-price { font-size: 2.5rem; font-weight: 900; margin: 20px 0; color: #fff; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        .payment-info { background: #0a0a0a; padding: 25px; border: 1px solid #222; border-radius: 10px; margin: 20px 0; text-align: left; }
+        .payment-info h3 { font-size: 0.7rem; color: #666; letter-spacing: 3px; margin-bottom: 15px; }
+        .payment-method-item { font-size: 0.8rem; margin: 10px 0; display: flex; align-items: center; gap: 10px; }
+        .whatsapp-float { position: fixed; bottom: 25px; right: 25px; background: #25d366; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 3000; box-shadow: 0 4px 15px rgba(0,0,0,0.5); text-decoration: none; }
+        footer { padding: 60px 20px; color: #222; font-size: 0.6rem; text-align: center; }
     </style>
 </head>
 <body>
 
-    <div class="announcement">ENVÍOS A TODO MÉXICO — CALIDAD OVERSIZE</div>
+    <div class="announcement">ENVÍOS A TODO MÉXICO — CAMISAS PREMIUM</div>
 
     <div class="brand-banner">
         <h1>Grax</h1>
         <p style="letter-spacing: 8px; font-size: 0.6rem;">ESTUDIO 2026</p>
     </div>
 
+    <h2 style="padding: 20px; font-size: 1.2rem; border-bottom: 1px solid #111; margin: 0;">CATÁLOGO</h2>
+
     <div class="products-grid">
-        <div class="product-card" onclick="openProduct('7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg')">
-            <img src="7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg">
-            <div class="price-tag">$450 MXN</div>
-        </div>
-        <div class="product-card" onclick="openProduct('63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg')">
-            <img src="63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg">
-            <div class="price-tag">$450 MXN</div>
-        </div>
-        <div class="product-card" onclick="openProduct('6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg')">
-            <img src="6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg">
-            <div class="price-tag">$450 MXN</div>
-        </div>
-        <div class="product-card" onclick="openProduct('7E33407F-C7DE-4065-8568-19B79A48809B.jpeg')">
-            <img src="7E33407F-C7DE-4065-8568-19B79A48809B.jpeg">
-            <div class="price-tag">$450 MXN</div>
-        </div>
-        <div class="product-card" onclick="openProduct('EDC1E25D-01D1-454C-A254-A915941FB790.jpeg')">
-            <img src="EDC1E25D-01D1-454C-A254-A915941FB790.jpeg">
-            <div class="price-tag">$450 MXN</div>
-        </div>
+        <div class="product-card" onclick="openProduct('$450 MXN', '270B9D35-2524-4982-AD0A-6565AB399CDA.jpeg')"><img src="270B9D35-2524-4982-AD0A-6565AB399CDA.jpeg"><div class="price-tag">$450 MXN</div></div>
+        <div class="product-card" onclick="openProduct('$450 MXN', '44EEB657-FC67-4DAB-845A-75153F5888BE.jpeg')"><img src="44EEB657-FC67-4DAB-845A-75153F5888BE.jpeg"><div class="price-tag">$450 MXN</div></div>
+        <div class="product-card" onclick="openProduct('$450 MXN', '63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg')"><img src="63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg"><div class="price-tag">$450 MXN</div></div>
+        <div class="product-card" onclick="openProduct('$450 MXN', '6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg')"><img src="6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg"><div class="price-tag">$450 MXN</div></div>
+        <div class="product-card" onclick="openProduct('$450 MXN', '7E33407F-C7DE-4065-8568-19B79A48809B.jpeg')"><img src="7E33407F-C7DE-4065-8568-19B79A48809B.jpeg"><div class="price-tag">$450 MXN</div></div>
+        <div class="product-card" onclick="openProduct('$450 MXN', 'AA946A33-3252-4A70-9019-DE86CE7C4425.jpeg')"><img src="AA946A33-3252-4A70-9019-DE86CE7C4425.jpeg"><div class="price-tag">$450 MXN</div></div>
+        <div class="product-card" onclick="openProduct('$450 MXN', 'C8C555F8-909F-4BB0-A5AF-924EC146030E.jpeg')"><img src="C8C555F8-909F-4BB0-A5AF-924EC146030E.jpeg"><div class="price-tag">$450 MXN</div></div>
+        <div class="product-card" onclick="openProduct('$450 MXN', 'EDC1E25D-01D1-4540-8F35-F02A00984E3A.jpeg')"><img src="EDC1E25D-01D1-4540-8F35-F02A00984E3A.jpeg"><div class="price-tag">$450 MXN</div></div>
+        <div class="product-card" onclick="openProduct('$450 MXN', '7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg')"><img src="7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg"><div class="price-tag">$450 MXN</div></div>
     </div>
 
     <div id="productModal" class="modal">
         <span class="close-modal" onclick="closeProduct()">&times;</span>
         <div class="modal-content">
             <img id="modalImg" class="modal-img" src="">
-            <div class="product-title">PREMIUM TEE</div>
-            <div class="product-desc">100% ALGODÓN — CORTE OVERSIZE — 240 GSM</div>
-            <div class="modal-price">$450.00 MXN</div>
-
-            <p style="font-size: 0.7rem; font-weight: bold; margin-bottom: 10px;">CANTIDAD</p>
-            <div class="qty-selector">
-                <button class="qty-btn" onclick="changeQty(-1)">-</button>
-                <input type="number" class="qty-input" id="qty" value="1" readonly>
-                <button class="qty-btn" onclick="changeQty(1)">+</button>
+            <div id="modalPrice" class="modal-price"></div>
+            <div class="payment-info">
+                <h3>MÉTODOS DE PAGO DISPONIBLES</h3>
+                <div class="payment-method-item">💳 TARJETA CRÉDITO / DÉBITO</div>
+                <div class="payment-method-item">🏪 OXXO / DEPÓSITO</div>
+                <div class="payment-method-item">📲 TRANSFERENCIA BANCARIA (SPEI)</div>
+                <div class="payment-method-item">📍 ENVÍO SEGURO A TODO MÉXICO</div>
             </div>
-
-            <a href="#" id="payLink" class="buy-btn">PAGAR CON TARJETA</a>
-            <a href="https://wa.me/529984081516" class="checkout-btn">PEDIR POR WHATSAPP</a>
         </div>
     </div>
 
     <a href="https://wa.me/529984081516" class="whatsapp-float">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="30">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35">
     </a>
 
     <script>
-        function openProduct(img) {
-            document.getElementById('modalImg').src = img;
+        function openProduct(price, imgSource) {
+            document.getElementById('modalImg').src = imgSource;
+            document.getElementById('modalPrice').innerText = price;
             document.getElementById('productModal').style.display = "block";
-            document.body.style.overflow = "hidden";
+            document.body.style.overflow = "hidden"; 
         }
-
         function closeProduct() {
             document.getElementById('productModal').style.display = "none";
-            document.body.style.overflow = "auto";
-        }
-
-        function changeQty(num) {
-            let qty = document.getElementById('qty');
-            let val = parseInt(qty.value) + num;
-            if(val > 0) qty.value = val;
+            document.body.style.overflow = "auto"; 
         }
     </script>
+    <footer>GRAX ESTUDIO © 2026</footer>
 </body>
 </html>
