@@ -1,52 +1,124 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>GRAX | Playeras Personalizadas</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
-      text-align: center;
-    }
-    header {
-      padding: 40px 20px;
-    }
-    h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 18px;
-      color: #ccc;
-    }
-    .btn {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 15px 25px;
-      background: #25d366;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 18px;
-    }
-    .btn:hover {
-      background: #1ebc57;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRAX STORE | Streetwear</title>
+    <style>
+        :root {
+            --primary: #ffffff;
+            --bg: #000000;
+            --accent: #333333;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--primary);
+            font-family: 'Helvetica Neue', sans-serif;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        header {
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--accent);
+        }
+        h1 {
+            font-size: 3.5rem;
+            letter-spacing: 8px;
+            margin: 0;
+        }
+        .subtitle {
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            color: #666;
+            margin-top: 10px;
+        }
+        /* Galería de Productos */
+        .shop-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .product-card {
+            background: #0a0a0a;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #111;
+            transition: 0.3s;
+        }
+        .product-card:hover {
+            border-color: #444;
+        }
+        .product-card img {
+            width: 100%;
+            height: auto;
+            filter: grayscale(100%);
+            transition: 0.5s;
+        }
+        .product-card:hover img {
+            filter: grayscale(0%);
+        }
+        .product-info {
+            margin-top: 20px;
+        }
+        .price {
+            font-size: 1.2rem;
+            margin: 10px 0;
+            color: #aaa;
+        }
+        .buy-btn {
+            display: inline-block;
+            background: white;
+            color: black;
+            padding: 12px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            width: 80%;
+        }
+        footer {
+            padding: 60px 20px;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #444;
+            border-top: 1px solid var(--accent);
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <h1>GRAX</h1>
-    <p>Playeras personalizadas · Diseños únicos · DTF</p>
-    <a class="btn" href="https://wa.me/52TU_NUMERO_AQUI" target="_blank">
-      Pedir por WhatsApp
-    </a>
-  </header>
+    <header>
+        <h1>GRAX</h1>
+        <div class="subtitle">Premium Streetwear Studio</div>
+    </header>
+
+    <div class="shop-container">
+        <div class="product-card">
+            <img src="https://via.placeholder.com/500x600/111/fff?text=DISEÑO+1" alt="T-shirt">
+            <div class="product-info">
+                <h3>Thorns Tee</h3>
+                <p class="price">$45.00</p>
+                <a href="#" class="buy-btn">AÑADIR AL CARRITO</a>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <img src="https://via.placeholder.com/500x600/111/fff?text=DISEÑO+2" alt="T-shirt">
+            <div class="product-info">
+                <h3>Sacred Face Tee</h3>
+                <p class="price">$45.00</p>
+                <a href="#" class="buy-btn">AÑADIR AL CARRITO</a>
+            </div>
+        </div>
+        
+        </div>
+
+    <footer>
+        &copy; 2026 GRAX ESTUDIO. WORLDWIDE SHIPPING.
+    </footer>
 
 </body>
 </html>
