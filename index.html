@@ -1,169 +1,26 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GRAX | ESTUDIO</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Inter:wght@400;700;900&display=swap');
-
-        /* RESET & BASE */
-        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; text-transform: uppercase; overflow-x: hidden; }
-        .announcement { background: #fff; color: #000; font-size: 0.6rem; padding: 10px; font-weight: 900; letter-spacing: 2px; text-align: center; position: sticky; top: 0; z-index: 1000; }
-
-        /* HERO SECTION */
-        .hero { height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; border-bottom: 1px solid #111; }
-        .hero h1 { font-family: 'UnifrakturMaguntia', serif; font-size: clamp(5rem, 15vw, 8rem); margin: 0; line-height: 0.8; }
-        .hero p { letter-spacing: 12px; font-size: 0.6rem; color: #666; margin-top: 10px; }
-
-        /* TABS NAVIGATION */
-        .nav-tabs { display: flex; justify-content: center; gap: 40px; padding: 30px 0; position: sticky; top: 35px; background: #000; z-index: 900; border-bottom: 1px solid #111; }
-        .tab-item { cursor: pointer; font-weight: 900; font-size: 0.75rem; letter-spacing: 2px; color: #444; transition: 0.3s; padding-bottom: 5px; }
-        .tab-item.active { color: #fff; border-bottom: 2px solid #fff; }
-
-        /* GRID & CARDS */
-        .container { padding: 20px 10px; max-width: 1200px; margin: 0 auto; }
-        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .product-card { background: #0a0a0a; border: 1px solid #1a1a1a; cursor: pointer; position: relative; }
-        .product-card img { width: 100%; display: block; aspect-ratio: 1/1.2; object-fit: cover; }
-        .card-info { padding: 15px; text-align: center; font-size: 0.8rem; font-weight: 900; }
-
-        /* DIGITAL PACK SECTION */
-        #section-diseños { display: none; }
-        .digital-box { background: #0a0a0a; border: 2px dashed #333; padding: 40px 20px; text-align: center; border-radius: 12px; max-width: 400px; margin: 0 auto; }
-        .digital-icon { font-size: 4rem; margin-bottom: 20px; display: block; }
-
-        /* MODAL STYLE */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; z-index: 2000; overflow-y: auto; }
-        .modal-content { padding: 20px; max-width: 500px; margin: 0 auto; padding-bottom: 80px; }
-        .close-modal { position: fixed; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; z-index: 2100; color: #fff; }
-        .modal-img { width: 100%; border-radius: 4px; margin-bottom: 20px; }
-        
-        /* BOTONES */
-        .btn-bbva { background: #004481; color: #fff; border: none; width: 100%; padding: 20px; font-weight: 900; border-radius: 8px; cursor: pointer; display: block; text-decoration: none; text-align: center; margin-bottom: 15px; font-size: 0.9rem; }
-        .btn-wa { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 15px; font-weight: 900; border-radius: 8px; cursor: pointer; font-size: 0.7rem; letter-spacing: 1px; }
-
-        /* TABLA DE MEDIDAS */
-        .size-table { width: 100%; font-size: 0.7rem; border-collapse: collapse; margin: 20px 0; color: #888; }
-        .size-table th { text-align: left; padding-bottom: 10px; color: #fff; }
-        .size-table td { padding: 8px 0; border-bottom: 1px solid #111; }
-
-        footer { padding: 60px 20px; text-align: center; color: #222; font-size: 0.6rem; letter-spacing: 3px; }
-    </style>
-</head>
-<body>
-
-    <div class="announcement">ENVÍOS NACIONALES — DIGITAL ASSETS DISPONIBLES</div>
-
-    <section class="hero">
-        <div>
-            <h1>Grax</h1>
-            <p>ESTUDIO MÉXICO 2026</p>
-        </div>
-    </section>
-
-    <div class="nav-tabs">
-        <div class="tab-item active" id="tab-prendas" onclick="showCategory('prendas')">PRENDAS</div>
-        <div class="tab-item" id="tab-diseños" onclick="showCategory('diseños')">DISEÑOS</div>
+<div id="section-prendas" class="products-grid">
+    <div class="product-card" onclick="openProduct('7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg', '$450')">
+        <img src="7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg">
+        <div class="card-info">$450 MXN</div>
     </div>
-
-    <div class="container">
-        <div id="section-prendas" class="products-grid">
-            <div class="product-card" onclick="openProduct('7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg', '$450')">
-                <img src="7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg">
-                <div class="card-info">$450 MXN</div>
-            </div>
-            <div class="product-card" onclick="openProduct('63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg', '$450')">
-                <img src="63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg">
-                <div class="card-info">$450 MXN</div>
-            </div>
-            </div>
-
-        <div id="section-diseños">
-            <div class="digital-box">
-                <span class="digital-icon">📁</span>
-                <h2 style="margin: 0;">GRAX VOL. 1</h2>
-                <p style="font-size: 0.6rem; color: #666; margin: 20px 0; line-height: 1.8;">
-                    PACK DE 10 GRÁFICOS STREETWEAR<br>
-                    FORMATOS: PNG ALTA RES + VECTOR (AI)<br>
-                    USO COMERCIAL PERMITIDO
-                </p>
-                <div style="font-size: 1.5rem; font-weight: 900; margin-bottom: 25px;">$200.00 MXN</div>
-                <a href="#" class="btn-bbva">COMPRAR PACK DIGITAL</a>
-                <p style="font-size: 0.5rem; color: #333; margin-top: 15px;">* EL ARCHIVO SE ENVÍA A TU EMAIL TRAS VALIDAR EL PAGO.</p>
-            </div>
-        </div>
+    
+    <div class="product-card" onclick="openProduct('63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg', '$450')">
+        <img src="63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg">
+        <div class="card-info">$450 MXN</div>
     </div>
-
-    <div id="productModal" class="modal">
-        <span class="close-modal" onclick="closeProduct()">&times;</span>
-        <div class="modal-content">
-            <img id="modalImg" class="modal-img" src="">
-            <div style="font-size: 0.6rem; color: #ffcc00; margin-bottom: 10px;">★★★★★ 5.0 REVIEWS</div>
-            <h2 id="modalTitle" style="margin: 0; font-size: 1.5rem;">PREMIUM OVERSIZE TEE</h2>
-            <p style="font-size: 0.7rem; color: #666;">100% ALGODÓN PESADO — CORTE CALLEJERO</p>
-            <div id="modalPrice" style="font-size: 2rem; font-weight: 900; margin: 20px 0;">$450.00</div>
-
-            <table class="size-table">
-                <thead><tr><th>TALLA</th><th>ANCHO</th><th>LARGO</th></tr></thead>
-                <tbody>
-                    <tr><td>CH (S)</td><td>55 CM</td><td>72 CM</td></tr>
-                    <tr><td>M (M)</td><td>58 CM</td><td>75 CM</td></tr>
-                    <tr><td>G (L)</td><td>61 CM</td><td>78 CM</td></tr>
-                </tbody>
-            </table>
-
-            <label style="font-size: 0.6rem; font-weight: 900; color: #444;">SELECCIONA TALLA</label>
-            <select id="talla" style="width: 100%; background: #111; color: #fff; padding: 15px; border: 1px solid #222; margin: 10px 0 25px 0; border-radius: 8px;">
-                <option>CHICA (S)</option>
-                <option>MEDIANA (M)</option>
-                <option>GRANDE (G)</option>
-                <option>EXTRA GRANDE (XL)</option>
-            </select>
-
-            <a href="#" id="bbva-link" class="btn-bbva">PAGAR CON BBVA</a>
-            <button class="btn-wa" onclick="enviarWA()">CONSULTAR POR WHATSAPP</button>
-        </div>
+    
+    <div class="product-card" onclick="openProduct('6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg', '$450')">
+        <img src="6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg">
+        <div class="card-info">$450 MXN</div>
     </div>
-
-    <footer>GRAX ESTUDIO © 2026 — CANCÚN, MÉXICO</footer>
-
-    <script>
-        function showCategory(cat) {
-            const prendas = document.getElementById('section-prendas');
-            const diseños = document.getElementById('section-diseños');
-            const tabP = document.getElementById('tab-prendas');
-            const tabD = document.getElementById('tab-diseños');
-
-            if(cat === 'prendas') {
-                prendas.style.display = 'grid';
-                diseños.style.display = 'none';
-                tabP.classList.add('active');
-                tabD.classList.remove('active');
-            } else {
-                prendas.style.display = 'none';
-                diseños.style.display = 'block';
-                tabP.classList.remove('active');
-                tabD.classList.add('active');
-            }
-        }
-
-        function openProduct(img, price) {
-            document.getElementById('modalImg').src = img;
-            document.getElementById('productModal').style.display = "block";
-            document.body.style.overflow = "hidden";
-        }
-
-        function closeProduct() {
-            document.getElementById('productModal').style.display = "none";
-            document.body.style.overflow = "auto";
-        }
-
-        function enviarWA() {
-            const talla = document.getElementById('talla').value;
-            const msg = `Hola GRAX! Me interesa la playera en talla ${talla}. ¿Tienen transferencia?`;
-            window.open(`https://wa.me/529984081516?text=${encodeURIComponent(msg)}`, '_blank');
-        }
-    </script>
-</body>
-</html>
+    
+    <div class="product-card" onclick="openProduct('7E33407F-C7DE-4065-8568-19B79A48809B.jpeg', '$450')">
+        <img src="7E33407F-C7DE-4065-8568-19B79A48809B.jpeg">
+        <div class="card-info">$450 MXN</div>
+    </div>
+    
+    <div class="product-card" onclick="openProduct('EDC1E25D-01D1-454C-A254-A915941FB790.jpeg', '$450')">
+        <img src="EDC1E25D-01D1-454C-A254-A915941FB790.jpeg">
+        <div class="card-info">$450 MXN</div>
+    </div>
+</div>
