@@ -3,133 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GRAX OFFICIAL STORE</title>
+    <title>GRAX | CAMISAS PREMIUM</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Inter:wght@900&display=swap');
+
         body { 
             background-color: #000; 
             color: #fff; 
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            font-family: 'Inter', sans-serif; 
             margin: 0; 
-            text-align: center; 
+            text-transform: uppercase;
         }
+
+        /* Barra superior actualizada */
+        .announcement {
+            background: #fff;
+            color: #000;
+            font-size: 0.65rem;
+            padding: 12px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
         header { 
-            padding: 80px 20px; 
-            border-bottom: 1px solid #111; 
+            padding: 50px 20px; 
+            border-bottom: 1px solid #111;
+            text-align: center;
         }
+
         .logo { 
-            font-size: clamp(3rem, 12vw, 6rem); 
-            font-weight: 900; 
-            letter-spacing: 20px; 
+            font-family: 'UnifrakturMaguntia', serif; 
+            font-size: 5.5rem; 
             margin: 0; 
-            text-transform: uppercase;
+            letter-spacing: -2px;
+            line-height: 1;
         }
-        .tagline { 
-            font-size: 0.7rem; 
-            letter-spacing: 6px; 
-            color: #444; 
-            margin-top: 15px; 
-            text-transform: uppercase;
+
+        .sub-logo {
+            letter-spacing: 8px;
+            font-size: 0.6rem;
+            color: #666;
+            margin-top: 5px;
         }
-        
+
+        h2.section-title {
+            text-align: left;
+            padding: 15px 0;
+            font-size: 1.2rem;
+            border-bottom: 2px solid #fff;
+            margin: 20px;
+            letter-spacing: 1px;
+        }
+
         .products-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 15px; 
-            padding: 20px; 
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-        
-        .product-card { 
-            background: #050505; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 10px; 
             padding: 10px; 
-            border: 1px solid #111; 
-            transition: all 0.4s ease; 
         }
-        .product-card:hover { 
-            border-color: #fff; 
-            transform: scale(1.02); 
+
+        .product-card { 
+            position: relative;
+            background: #0a0a0a; 
+            border: 1px solid #1a1a1a;
         }
+
         .product-card img { 
             width: 100%; 
-            height: auto; 
             display: block; 
-            filter: contrast(110%);
         }
-        
+
+        .badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: #6200ee;
+            color: #fff;
+            padding: 4px 8px;
+            font-size: 0.5rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+
         .buy-btn { 
             display: block; 
-            margin-top: 15px; 
-            padding: 15px; 
+            padding: 12px; 
             background: #fff; 
             color: #000; 
             text-decoration: none; 
             font-size: 0.7rem; 
-            font-weight: 800; 
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            font-weight: 900; 
+            text-align: center;
         }
-        
-        footer { 
-            padding: 100px 20px; 
-            color: #222; 
-            font-size: 0.6rem; 
-            letter-spacing: 4px; 
+
+        /* WhatsApp flotante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25d366;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
+
+        footer { padding: 80px 20px; color: #333; font-size: 0.6rem; text-align: center; letter-spacing: 3px; }
     </style>
 </head>
 <body>
 
+    <div class="announcement">ENVÍOS A TODO MÉXICO — CAMISAS PREMIUM</div>
+
     <header>
-        <h1 class="logo">GRAX</h1>
-        <p class="tagline">Estudio de Diseño / Colección 2026</p>
+        <h1 class="logo">Grax</h1>
+        <p class="sub-logo">STUDIO / EST. 2026</p>
     </header>
+
+    <h2 class="section-title">LOS MÁS VENDIDOS</h2>
 
     <div class="products-grid">
         <div class="product-card">
+            <div class="badge">OFERTA</div>
             <img src="270B9D35-2524-4982-AD0A-6565AB399CDA.jpeg">
-            <a href="https://wa.me/529984081516?text=Hola%20GRAX,%20me%20interesa%20este%20diseño" class="buy-btn">WHATSAPP</a>
+            <a href="https://wa.me/529984081516?text=Hola%20GRAX,%20quiero%20esta%20camisa" class="buy-btn">WHATSAPP</a>
         </div>
 
         <div class="product-card">
             <img src="44EEB657-FC67-4DAB-845A-75153F5888BE.jpeg">
-            <a href="https://wa.me/529984081516?text=Hola%20GRAX,%20me%20interesa%20este%20diseño" class="buy-btn">WHATSAPP</a>
+            <a href="https://wa.me/529984081516?text=Hola%20GRAX,%20quiero%20esta%20camisa" class="buy-btn">WHATSAPP</a>
         </div>
 
         <div class="product-card">
             <img src="63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg">
-            <a href="https://wa.me/529984081516?text=Hola%20GRAX,%20me%20interesa%20este%20diseño" class="buy-btn">WHATSAPP</a>
+            <a href="https://wa.me/529984081516?text=Hola%20GRAX,%20quiero%20esta%20camisa" class="buy-btn">WHATSAPP</a>
         </div>
 
         <div class="product-card">
+            <div class="badge">OFERTA</div>
             <img src="6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg">
-            <a href="https://wa.me/529984081516?text=Hola%20GRAX,%20me%20interesa%20este%20diseño" class="buy-btn">WHATSAPP</a>
+            <a href="https://wa.me/529984081516?text=Hola%20GRAX,%20quiero%20esta%20camisa" class="buy-btn">WHATSAPP</a>
         </div>
 
         <div class="product-card">
             <img src="7E33407F-C7DE-4065-8568-19B79A48809B.jpeg">
-            <a href="https://wa.me/529984081516?text=Hola%20GRAX,%20me%20interesa%20este%20diseño" class="buy-btn">WHATSAPP</a>
+            <a href="https://wa.me/529984081516?text=Hola%20GRAX,%20quiero%20esta%20camisa" class="buy-btn">WHATSAPP</a>
         </div>
 
         <div class="product-card">
             <img src="AA946A33-3252-4A70-9019-DE86CE7C4425.jpeg">
-            <a href="https://wa.me/529984081516?text=Hola%20GRAX,%20me%20interesa%20este%20diseño" class="buy-btn">WHATSAPP</a>
+            <a href="https://wa.me/529984081516?text=Hola%20GRAX,%20quiero%20esta%20camisa" class="buy-btn">WHATSAPP</a>
         </div>
 
         <div class="product-card">
             <img src="C8C555F8-909F-4BB0-A5AF-924EC146030E.jpeg">
-            <a href="https://wa.me/529984081516?text=Hola%20GRAX,%20me%20interesa%20este%20diseño" class="buy-btn">WHATSAPP</a>
+            <a href="https://wa.me/529984081516?text=Hola%20GRAX,%20quiero%20esta%20camisa" class="buy-btn">WHATSAPP</a>
         </div>
 
         <div class="product-card">
             <img src="EDC1E25D-01D1-4540-8F35-F02A00984E3A.jpeg">
-            <a href="https://wa.me/529984081516?text=Hola%20GRAX,%20me%20interesa%20este%20diseño" class="buy-btn">WHATSAPP</a>
+            <a href="https://wa.me/529984081516?text=Hola%20GRAX,%20quiero%20esta%20camisa" class="buy-btn">WHATSAPP</a>
         </div>
     </div>
 
-    <footer>
-        GRAX ESTUDIO © WORLDWIDE SHIPPING
-    </footer>
+    <a href="https://wa.me/529984081516" class="whatsapp-float">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="30">
+    </a>
+
+    <footer>GRAX ESTUDIO © ALL RIGHTS RESERVED</footer>
 
 </body>
 </html>
