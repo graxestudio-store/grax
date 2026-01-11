@@ -3,176 +3,319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GRAX | ESTUDIO</title>
+
+    <!-- SEO -->
+    <title>GRAX ESTUDIO | Camisas DTF & Diseños Streetwear</title>
+    <meta name="description" content="Camisas oversize DTF y diseños digitales listos para impresión. Streetwear mexicano. Grax Estudio.">
+    <meta name="keywords" content="DTF, camisas oversize, diseños DTF, streetwear, playeras personalizadas">
+    <meta name="author" content="Grax Estudio">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Inter:wght@400;700;900&display=swap');
 
-        /* CONFIGURACIÓN BASE */
-        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; text-transform: uppercase; overflow-x: hidden; }
-        
-        .announcement { background: #fff; color: #000; font-size: 0.6rem; padding: 10px; font-weight: 900; letter-spacing: 2px; text-align: center; position: sticky; top: 0; z-index: 1000; }
-
-        /* SECCIÓN DE IMPACTO */
-        .hero { height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; border-bottom: 1px solid #111; }
-        .hero h1 { font-family: 'UnifrakturMaguntia', serif; font-size: clamp(4rem, 15vw, 7rem); margin: 0; line-height: 0.8; }
-        .hero p { letter-spacing: 10px; font-size: 0.6rem; color: #555; margin-top: 15px; }
-
-        /* MENÚ DE NAVEGACIÓN */
-        .nav-tabs { display: flex; justify-content: center; gap: 40px; padding: 25px 0; background: #000; border-bottom: 1px solid #111; position: sticky; top: 35px; z-index: 900; }
-        .tab-item { cursor: pointer; font-weight: 900; font-size: 0.7rem; letter-spacing: 2px; color: #444; transition: 0.3s; }
-        .tab-item.active { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 5px; }
-
-        .container { padding: 20px 10px; max-width: 1200px; margin: 0 auto; }
-
-        /* GRID CORREGIDA: FOTOS COMPLETAS */
-        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-        .product-card { background: #000; cursor: pointer; display: flex; flex-direction: column; }
-        
-        .product-card img { 
-            width: 100%; 
-            height: auto; 
-            display: block; 
-            object-fit: contain; /* Esto evita que se corten las imágenes */
+        body {
+            background:#000;
+            color:#fff;
+            font-family:'Inter',sans-serif;
+            margin:0;
+            text-transform:uppercase;
+            overflow-x:hidden;
         }
-        
-        .card-info { padding: 15px 5px; text-align: center; font-size: 0.8rem; font-weight: 900; letter-spacing: 1px; }
 
-        /* SECCIÓN DISEÑOS */
-        #section-diseños { display: none; padding: 40px 0; }
-        .digital-card { 
-            background: #0a0a0a; 
-            border: 1px solid #222; 
-            max-width: 400px; 
-            margin: 0 auto; 
-            border-radius: 10px; 
-            overflow: hidden; 
+        .announcement {
+            background:#fff;
+            color:#000;
+            font-size:.6rem;
+            padding:10px;
+            font-weight:900;
+            letter-spacing:2px;
+            text-align:center;
+            position:sticky;
+            top:0;
+            z-index:1000;
         }
-        .digital-header { background: #111; padding: 40px 20px; text-align: center; border-bottom: 1px solid #222; }
-        .digital-body { padding: 30px 20px; }
+
+        /* HERO */
+        .hero {
+            height:60vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            border-bottom:1px solid #111;
+        }
+
+        .hero h1 {
+            font-family:'UnifrakturMaguntia',serif;
+            font-size:clamp(4.5rem,16vw,8rem);
+            margin:0;
+            line-height:.8;
+            letter-spacing:2px;
+        }
+
+        .hero p {
+            letter-spacing:10px;
+            font-size:.6rem;
+            color:#555;
+            margin-top:15px;
+        }
+
+        /* GLITCH LOGO */
+        .glitch {
+            position:relative;
+            color:#fff;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content:attr(data-text);
+            position:absolute;
+            left:0;
+            width:100%;
+            overflow:hidden;
+        }
+
+        .glitch::before {
+            top:-2px;
+            text-shadow:-2px 0 white;
+            opacity:.7;
+        }
+
+        .glitch::after {
+            top:2px;
+            text-shadow:2px 0 white;
+            opacity:.5;
+        }
+
+        /* NAV */
+        .nav-tabs {
+            display:flex;
+            justify-content:center;
+            gap:40px;
+            padding:25px 0;
+            background:#000;
+            border-bottom:1px solid #111;
+            position:sticky;
+            top:35px;
+            z-index:900;
+        }
+
+        .tab-item {
+            cursor:pointer;
+            font-weight:900;
+            font-size:.7rem;
+            letter-spacing:2px;
+            color:#444;
+            transition:.3s;
+        }
+
+        .tab-item.active {
+            color:#fff;
+            border-bottom:2px solid #fff;
+            padding-bottom:5px;
+        }
+
+        .container {
+            padding:20px 10px;
+            max-width:1200px;
+            margin:0 auto;
+        }
+
+        /* PRODUCTOS */
+        .products-grid {
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:15px;
+        }
+
+        .product-card {
+            cursor:pointer;
+            display:flex;
+            flex-direction:column;
+        }
+
+        .product-card img {
+            width:100%;
+            height:auto;
+            object-fit:contain;
+        }
+
+        .card-info {
+            padding:15px 5px;
+            text-align:center;
+            font-size:.8rem;
+            font-weight:900;
+            letter-spacing:1px;
+        }
+
+        /* DISEÑOS */
+        #section-diseños {
+            display:none;
+            padding:40px 0;
+        }
+
+        .digital-card {
+            background:#0a0a0a;
+            border:1px solid #222;
+            max-width:400px;
+            margin:0 auto;
+            border-radius:10px;
+            overflow:hidden;
+        }
+
+        .digital-header {
+            background:#111;
+            padding:40px 20px;
+            text-align:center;
+            border-bottom:1px solid #222;
+        }
+
+        .digital-body {
+            padding:30px 20px;
+        }
 
         /* MODAL */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; z-index: 2000; overflow-y: auto; }
-        .modal-content { padding: 20px; max-width: 500px; margin: 0 auto; padding-bottom: 100px; }
-        .close-modal { position: fixed; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; z-index: 2100; color: #fff; }
-        .modal-img { width: 100%; height: auto; object-fit: contain; border-radius: 4px; margin-bottom: 20px; }
-        
-        /* BOTONES */
-        .btn-bbva { background: #004481; color: #fff; border: none; width: 100%; padding: 20px; font-weight: 900; border-radius: 8px; cursor: pointer; display: block; text-decoration: none; text-align: center; margin-bottom: 15px; font-size: 0.9rem; }
-        .btn-wa { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 15px; font-weight: 900; border-radius: 8px; cursor: pointer; font-size: 0.7rem; }
+        .modal {
+            position:fixed;
+            inset:0;
+            background:#000;
+            display:none;
+            z-index:2000;
+            overflow-y:auto;
+        }
 
-        footer { padding: 60px 20px; text-align: center; color: #222; font-size: 0.6rem; letter-spacing: 3px; }
+        .modal-content {
+            padding:20px;
+            max-width:500px;
+            margin:auto;
+            padding-bottom:120px;
+        }
+
+        .close-modal {
+            position:fixed;
+            top:20px;
+            right:20px;
+            font-size:2rem;
+            cursor:pointer;
+            color:#fff;
+            z-index:2100;
+        }
+
+        .modal-img {
+            width:100%;
+            height:auto;
+            object-fit:contain;
+            margin-bottom:20px;
+        }
+
+        .btn-bbva {
+            background:#004481;
+            color:#fff;
+            border:none;
+            width:100%;
+            padding:20px;
+            font-weight:900;
+            border-radius:8px;
+            cursor:pointer;
+            text-decoration:none;
+            display:block;
+            text-align:center;
+            margin-bottom:15px;
+        }
+
+        .btn-wa {
+            background:transparent;
+            color:#fff;
+            border:1px solid #333;
+            width:100%;
+            padding:15px;
+            font-weight:900;
+            border-radius:8px;
+            cursor:pointer;
+            font-size:.7rem;
+        }
+
+        footer {
+            padding:60px 20px;
+            text-align:center;
+            font-size:.6rem;
+            letter-spacing:3px;
+            color:#333;
+        }
     </style>
 </head>
+
 <body>
 
-    <div class="announcement">ENVÍOS NACIONALES — DIGITAL ASSETS DISPONIBLES</div>
+<div class="announcement">ENVÍOS NACIONALES — DIGITAL ASSETS DISPONIBLES</div>
 
-    <section class="hero">
-        <div>
-            <h1>Grax</h1>
-            <p>ESTUDIO MÉXICO 2026</p>
-        </div>
-    </section>
-
-    <div class="nav-tabs">
-        <div class="tab-item active" id="tab-prendas" onclick="showCategory('prendas')">PRENDAS</div>
-        <div class="tab-item" id="tab-diseños" onclick="showCategory('diseños')">DISEÑOS</div>
+<section class="hero">
+    <div>
+        <h1 class="glitch" data-text="GRAX">GRAX</h1>
+        <p>ESTUDIO MÉXICO 2026</p>
     </div>
+</section>
 
-    <div class="container">
-        <div id="section-prendas" class="products-grid">
-            <div class="product-card" onclick="openProduct('7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg')">
-                <img src="7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg">
-                <div class="card-info">$450 MXN</div>
-            </div>
-            <div class="product-card" onclick="openProduct('63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg')">
-                <img src="63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg">
-                <div class="card-info">$450 MXN</div>
-            </div>
-            <div class="product-card" onclick="openProduct('6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg')">
-                <img src="6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg">
-                <div class="card-info">$450 MXN</div>
-            </div>
-            <div class="product-card" onclick="openProduct('7E33407F-C7DE-4065-8568-19B79A48809B.jpeg')">
-                <img src="7E33407F-C7DE-4065-8568-19B79A48809B.jpeg">
-                <div class="card-info">$450 MXN</div>
-            </div>
-            <div class="product-card" onclick="openProduct('EDC1E25D-01D1-454C-A254-A915941FB790.jpeg')">
-                <img src="EDC1E25D-01D1-454C-A254-A915941FB790.jpeg">
-                <div class="card-info">$450 MXN</div>
-            </div>
-        </div>
+<div class="nav-tabs">
+    <div class="tab-item active" id="tab-prendas" onclick="showCategory('prendas')">PRENDAS</div>
+    <div class="tab-item" id="tab-diseños" onclick="showCategory('diseños')">DISEÑOS</div>
+</div>
 
-        <div id="section-diseños">
-            <div class="digital-card">
-                <div class="digital-header">
-                    <div style="font-family: 'UnifrakturMaguntia'; font-size: 2.5rem;">Grax Vol. 1</div>
-                    <p style="font-size: 0.5rem; letter-spacing: 4px; color: #666;">ASSET PACK DIGITAL</p>
-                </div>
-                <div class="digital-body">
-                    <p style="font-size: 0.65rem; color: #888; line-height: 1.6; margin-bottom: 20px;">
-                        INCLUYE 10 GRÁFICOS STREETWEAR EN ALTA RESOLUCIÓN (PNG + VECTOR). LISTOS PARA DTF Y SERIGRAFÍA.
-                    </p>
-                    <div style="font-size: 1.5rem; font-weight: 900; margin-bottom: 25px;">$200.00 MXN</div>
-                    <a href="#" class="btn-bbva">COMPRAR PACK</a>
-                    <p style="font-size: 0.5rem; color: #333; text-align: center; margin-top: 10px;">ENVÍO INMEDIATO VÍA EMAIL</p>
-                </div>
-            </div>
+<div class="container">
+    <div id="section-prendas" class="products-grid">
+        <div class="product-card" onclick="openProduct('producto1.jpeg')">
+            <img src="producto1.jpeg" loading="lazy">
+            <div class="card-info">$450 MXN</div>
         </div>
     </div>
 
-    <div id="productModal" class="modal">
-        <span class="close-modal" onclick="closeProduct()">&times;</span>
-        <div class="modal-content">
-            <img id="modalImg" class="modal-img" src="">
-            <h2 style="margin: 0; font-size: 1.5rem;">PREMIUM OVERSIZE TEE</h2>
-            <div style="font-size: 1.8rem; font-weight: 900; margin: 15px 0;">$450.00 MXN</div>
-            
-            <p style="font-size: 0.6rem; color: #555;">SELECCIONA TALLA:</p>
-            <select id="talla" style="width: 100%; background: #111; color: #fff; padding: 15px; border: 1px solid #333; margin-bottom: 20px;">
-                <option>CHICA (S)</option>
-                <option>MEDIANA (M)</option>
-                <option>GRANDE (G)</option>
-                <option>EXTRA GRANDE (XL)</option>
-            </select>
-
-            <a href="#" class="btn-bbva">PAGAR CON BBVA</a>
-            <button class="btn-wa" onclick="enviarWA()">WHATSAPP</button>
+    <div id="section-diseños">
+        <div class="digital-card">
+            <div class="digital-header">
+                <div style="font-family:'UnifrakturMaguntia';font-size:2.5rem;">GRAX VOL. 1</div>
+                <p style="font-size:.5rem;letter-spacing:4px;color:#666;">ASSET PACK DIGITAL</p>
+            </div>
+            <div class="digital-body">
+                <p style="font-size:.65rem;color:#888;">
+                    10 GRÁFICOS STREETWEAR · PNG + VECTOR · LISTOS PARA DTF
+                </p>
+                <div style="font-size:1.5rem;font-weight:900;margin:25px 0;">$200 MXN</div>
+                <a href="#" class="btn-bbva">COMPRAR PACK</a>
+            </div>
         </div>
     </div>
+</div>
 
-    <footer>GRAX ESTUDIO © 2026</footer>
+<footer>
+    GRAX ESTUDIO © 2026<br>
+    DTF · STREETWEAR · DIGITAL ASSETS
+</footer>
 
-    <script>
-        function showCategory(cat) {
-            const p = document.getElementById('section-prendas');
-            const d = document.getElementById('section-diseños');
-            const tp = document.getElementById('tab-prendas');
-            const td = document.getElementById('tab-diseños');
-            if(cat === 'prendas') {
-                p.style.display = 'grid'; d.style.display = 'none';
-                tp.classList.add('active'); td.classList.remove('active');
-            } else {
-                p.style.display = 'none'; d.style.display = 'block';
-                tp.classList.remove('active'); td.classList.add('active');
-            }
-        }
+<script>
+function showCategory(cat){
+    section_prendas = document.getElementById('section-prendas');
+    section_diseños = document.getElementById('section-diseños');
+    tab_prendas = document.getElementById('tab-prendas');
+    tab_diseños = document.getElementById('tab-diseños');
 
-        function openProduct(img) {
-            document.getElementById('modalImg').src = img;
-            document.getElementById('productModal').style.display = "block";
-            document.body.style.overflow = "hidden";
-        }
+    if(cat==='prendas'){
+        section_prendas.style.display='grid';
+        section_diseños.style.display='none';
+        tab_prendas.classList.add('active');
+        tab_diseños.classList.remove('active');
+    } else {
+        section_prendas.style.display='none';
+        section_diseños.style.display='block';
+        tab_prendas.classList.remove('active');
+        tab_diseños.classList.add('active');
+    }
+}
 
-        function closeProduct() {
-            document.getElementById('productModal').style.display = "none";
-            document.body.style.overflow = "auto";
-        }
+function openProduct(img){
+    document.getElementById('productModal').style.display='block';
+}
 
-        function enviarWA() {
-            const t = document.getElementById('talla').value;
-            window.open(`https://wa.me/529984081516?text=Hola! Quiero la playera en talla ${t}`, '_blank');
-        }
-    </script>
+</script>
+
 </body>
 </html>
