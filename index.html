@@ -1,69 +1,169 @@
-<div id="productModal" class="modal">
-    <span class="close-modal" onclick="closeProduct()">&times;</span>
-    <div class="modal-content">
-        <img id="modalImg" class="modal-img" src="">
-        <div class="product-title">PREMIUM TEE</div>
-        <div class="product-desc">100% ALGODÓN — CORTE OVERSIZE — 180 G/M²</div>
-        <div class="modal-price">$450.00 MXN</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRAX | PREMIUM STORE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Inter:wght@400;700;900&display=swap');
 
-        <div style="background: #0a0a0a; padding: 15px; border: 1px solid #222; margin-bottom: 25px;">
-            <p style="font-size: 0.6rem; color: #888; letter-spacing: 2px; margin-bottom: 10px;">GUÍA DE MEDIDAS (CM)</p>
-            <table style="width: 100%; font-size: 0.7rem; border-collapse: collapse; text-align: left;">
-                <tr style="border-bottom: 1px solid #222; color: #666;">
-                    <th style="padding: 5px;">TALLA</th>
-                    <th style="padding: 5px;">ANCHO</th>
-                    <th style="padding: 5px;">LARGO</th>
-                </tr>
-                <tr>
-                    <td style="padding: 5px; font-weight: 900;">CH (S)</td>
-                    <td style="padding: 5px;">55 CM</td>
-                    <td style="padding: 5px;">72 CM</td>
-                </tr>
-                <tr>
-                    <td style="padding: 5px; font-weight: 900;">M (M)</td>
-                    <td style="padding: 5px;">58 CM</td>
-                    <td style="padding: 5px;">75 CM</td>
-                </tr>
-                <tr>
-                    <td style="padding: 5px; font-weight: 900;">G (L)</td>
-                    <td style="padding: 5px;">61 CM</td>
-                    <td style="padding: 5px;">78 CM</td>
-                </tr>
-                <tr>
-                    <td style="padding: 5px; font-weight: 900;">XG (XL)</td>
-                    <td style="padding: 5px;">64 CM</td>
-                    <td style="padding: 5px;">81 CM</td>
-                </tr>
-            </table>
-            <p style="font-size: 0.55rem; color: #444; margin-top: 10px;">* MEDIDAS TOMADAS CON LA PRENDA EN PLANO.</p>
-        </div>
-
-        <span class="selector-label">SELECCIONA TU TALLA</span>
-        <select id="talla">
-            <option value="Chica">CHICA (S)</option>
-            <option value="Mediana">MEDIANA (M)</option>
-            <option value="Grande">GRANDE (G)</option>
-            <option value="Extra Grande">EXTRA GRANDE (XL)</option>
-        </select>
-
-        <span class="selector-label">CANTIDAD</span>
-        <div class="qty-selector">
-            <button class="qty-btn" onclick="changeQty(-1)">-</button>
-            <input type="number" class="qty-input" id="qty" value="1" readonly>
-            <button class="qty-btn" onclick="changeQty(1)">+</button>
-        </div>
-
-        <a href="TU_LINK_DE_BBVA_AQUI" class="buy-btn" id="btnPagar">COMPRAR AHORA</a>
+        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; text-transform: uppercase; overflow-x: hidden; }
         
-        <button onclick="enviarWhatsApp()" class="whatsapp-btn">PEDIR POR WHATSAPP</button>
-    </div>
-</div>
+        .announcement { background: #fff; color: #000; font-size: 0.65rem; padding: 12px; font-weight: 900; letter-spacing: 2px; text-align: center; position: sticky; top: 0; z-index: 100; }
 
-<script>
-    function enviarWhatsApp() {
-        let talla = document.getElementById('talla').value;
-        let qty = document.getElementById('qty').value;
-        let mensaje = `Hola GRAX! Me interesa comprar ${qty} playera(s) GRAX en talla ${talla}.`;
-        window.open(`https://wa.me/529984081516?text=${encodeURIComponent(mensaje)}`, '_blank');
-    }
-</script>
+        .brand-banner { padding: 40px 20px; text-align: center; border-bottom: 1px solid #111; }
+        .brand-banner h1 { font-family: 'UnifrakturMaguntia', serif; font-size: 5rem; margin: 0; line-height: 1; }
+
+        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 10px; }
+        .product-card { background: #111; border: 1px solid #222; cursor: pointer; }
+        .product-card img { width: 100%; display: block; aspect-ratio: 1/1.2; object-fit: cover; }
+        .price-tag { color: #fff; font-weight: 900; padding: 15px; text-align: center; font-size: 0.9rem; }
+
+        /* MODAL */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; z-index: 2000; overflow-y: auto; }
+        .modal-content { padding: 20px; max-width: 500px; margin: 0 auto; padding-bottom: 100px; }
+        .close-modal { position: fixed; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; z-index: 2100; color: #fff; background: rgba(0,0,0,0.5); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+        
+        .modal-img { width: 100%; border-radius: 4px; margin-bottom: 20px; }
+        
+        .stars { color: #ffcc00; font-size: 0.9rem; margin-bottom: 10px; }
+        .product-title { font-size: 1.8rem; font-weight: 900; margin-bottom: 10px; }
+        .product-desc { font-size: 0.75rem; color: #888; margin-bottom: 15px; }
+        
+        .price-container { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
+        .old-price { font-size: 1.2rem; color: #666; text-decoration: line-through; }
+        .current-price { font-size: 1.8rem; font-weight: 900; color: #fff; }
+        .offer-badge { background: #4a2c4d; color: #fff; padding: 4px 12px; font-size: 0.7rem; border-radius: 20px; font-weight: bold; }
+
+        .size-chart { background: #0a0a0a; padding: 15px; border: 1px solid #222; margin-bottom: 25px; border-radius: 8px; }
+        .size-chart table { width: 100%; font-size: 0.7rem; border-collapse: collapse; text-align: left; }
+        .size-chart th { color: #555; padding-bottom: 8px; font-size: 0.6rem; }
+        .size-chart td { padding: 8px 0; border-bottom: 1px solid #1a1a1a; }
+
+        .selector-label { font-size: 0.7rem; font-weight: bold; margin-bottom: 8px; display: block; color: #aaa; }
+        select { background: #111; color: #fff; border: 1px solid #333; padding: 15px; width: 100%; font-weight: bold; margin-bottom: 20px; border-radius: 8px; font-family: 'Inter'; }
+        
+        .qty-container { display: flex; align-items: center; border: 1px solid #333; width: fit-content; border-radius: 8px; margin-bottom: 25px; }
+        .qty-btn { background: none; border: none; color: #fff; padding: 15px 25px; cursor: pointer; font-size: 1.2rem; }
+        .qty-input { background: none; border: none; color: #fff; width: 50px; text-align: center; font-weight: 900; font-size: 1.1rem; }
+
+        /* BOTONES */
+        .btn-cart { background: #fff; color: #000; border: none; width: 100%; padding: 20px; font-weight: 900; border-radius: 8px; cursor: pointer; margin-bottom: 12px; }
+        .btn-pay { background: #004481; color: #fff; border: none; width: 100%; padding: 20px; font-weight: 900; border-radius: 8px; cursor: pointer; display: block; text-decoration: none; text-align: center; margin-bottom: 20px; }
+        
+        .whatsapp-link { color: #fff; text-decoration: underline; font-size: 0.8rem; display: block; text-align: center; cursor: pointer; opacity: 0.7; }
+
+        footer { padding: 40px 20px; text-align: center; color: #222; font-size: 0.7rem; }
+    </style>
+</head>
+<body>
+
+    <div class="announcement">ENVÍOS A TODO MÉXICO — CALIDAD PREMIUM OVERSIZE</div>
+
+    <div class="brand-banner">
+        <h1>Grax</h1>
+        <p style="letter-spacing: 8px; font-size: 0.6rem;">ESTUDIO 2026</p>
+    </div>
+
+    <div class="products-grid">
+        <div class="product-card" onclick="openProduct('7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg')">
+            <img src="7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg">
+            <div class="price-tag">$450 MXN</div>
+        </div>
+        <div class="product-card" onclick="openProduct('63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg')">
+            <img src="63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg">
+            <div class="price-tag">$450 MXN</div>
+        </div>
+        <div class="product-card" onclick="openProduct('6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg')">
+            <img src="6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg">
+            <div class="price-tag">$450 MXN</div>
+        </div>
+        <div class="product-card" onclick="openProduct('7E33407F-C7DE-4065-8568-19B79A48809B.jpeg')">
+            <img src="7E33407F-C7DE-4065-8568-19B79A48809B.jpeg">
+            <div class="price-tag">$450 MXN</div>
+        </div>
+        <div class="product-card" onclick="openProduct('EDC1E25D-01D1-454C-A254-A915941FB790.jpeg')">
+            <img src="EDC1E25D-01D1-454C-A254-A915941FB790.jpeg">
+            <div class="price-tag">$450 MXN</div>
+        </div>
+    </div>
+
+    <div id="productModal" class="modal">
+        <span class="close-modal" onclick="closeProduct()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImg" class="modal-img" src="">
+            
+            <div class="stars">★★★★★ 5.0 (78 reviews)</div>
+            <div class="product-title">PREMIUM OVERSIZE TEE</div>
+            <div class="product-desc">100% ALGODÓN — 180 G/M² — CORTE OVERSIZE</div>
+            
+            <div class="price-container">
+                <span class="old-price">$600.00</span>
+                <span class="current-price">$450.00 MXN</span>
+                <span class="offer-badge">Oferta</span>
+            </div>
+
+            <div class="size-chart">
+                <table>
+                    <thead><tr><th>TALLA</th><th>ANCHO</th><th>LARGO</th></tr></thead>
+                    <tbody>
+                        <tr><td>CH (S)</td><td>55 CM</td><td>72 CM</td></tr>
+                        <tr><td>M (M)</td><td>58 CM</td><td>75 CM</td></tr>
+                        <tr><td>G (L)</td><td>61 CM</td><td>78 CM</td></tr>
+                        <tr><td>XG (XL)</td><td>64 CM</td><td>81 CM</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <span class="selector-label">SELECCIONA TALLA</span>
+            <select id="talla">
+                <option value="Chica (S)">CHICA (S)</option>
+                <option value="Mediana (M)">MEDIANA (M)</option>
+                <option value="Grande (G)">GRANDE (G)</option>
+                <option value="Extra Grande (XL)">EXTRA GRANDE (XL)</option>
+            </select>
+
+            <span class="selector-label">CANTIDAD</span>
+            <div class="qty-container">
+                <button class="qty-btn" onclick="changeQty(-1)">-</button>
+                <input type="number" class="qty-input" id="qty" value="1" readonly>
+                <button class="qty-btn" onclick="changeQty(1)">+</button>
+            </div>
+
+            <button class="btn-cart" onclick="alert('Producto añadido al carrito')">AGREGAR AL CARRITO</button>
+            
+            <a href="#" class="btn-pay" id="linkBBVA">PAGAR CON BBVA</a>
+
+            <span onclick="enviarWhatsApp()" class="whatsapp-link">Más opciones de pago (WhatsApp)</span>
+        </div>
+    </div>
+
+    <footer>GRAX ESTUDIO © 2026</footer>
+
+    <script>
+        function openProduct(img) {
+            document.getElementById('modalImg').src = img;
+            document.getElementById('productModal').style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeProduct() {
+            document.getElementById('productModal').style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        function changeQty(num) {
+            let qty = document.getElementById('qty');
+            let val = parseInt(qty.value) + num;
+            if(val > 0) qty.value = val;
+        }
+
+        function enviarWhatsApp() {
+            let t = document.getElementById('talla').value;
+            let q = document.getElementById('qty').value;
+            let msg = `Hola GRAX! Me interesa comprar ${q} playera(s) en talla ${t}. ¿Me podrían dar sus datos de transferencia?`;
+            window.open(`https://wa.me/529984081516?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
