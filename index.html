@@ -10,7 +10,7 @@
         /* BASE */
         body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; text-transform: uppercase; overflow-x: hidden; }
         
-        /* VIDEO DE FONDO CON EL NOMBRE EXACTO */
+        /* VIDEO DE FONDO */
         .video-background {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1; overflow: hidden; background: #000;
@@ -18,45 +18,59 @@
         .video-background video {
             min-width: 100%; min-height: 100%; width: auto; height: auto;
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            filter: brightness(30%) grayscale(100%);
+            filter: brightness(25%) grayscale(100%);
         }
 
         .announcement { background: rgba(255, 255, 255, 0.9); color: #000; font-size: 0.6rem; padding: 10px; font-weight: 900; letter-spacing: 2px; text-align: center; position: sticky; top: 0; z-index: 1000; }
 
-        /* HERO - SIN FONDO NEGRO PARA QUE SE VEA EL VIDEO */
-        .hero { height: 50vh; display: flex; align-items: center; justify-content: center; text-align: center; background: transparent; }
-        .hero h1 { font-family: 'UnifrakturMaguntia', serif; font-size: clamp(4rem, 15vw, 7rem); margin: 0; line-height: 0.8; }
-        .hero p { letter-spacing: 10px; font-size: 0.6rem; color: #888; margin-top: 15px; }
+        .hero { height: 45vh; display: flex; align-items: center; justify-content: center; text-align: center; background: transparent; }
+        .hero h1 { font-family: 'UnifrakturMaguntia', serif; font-size: clamp(4rem, 15vw, 7rem); margin: 0; }
 
-        /* NAV TABS */
         .nav-tabs { display: flex; justify-content: center; gap: 40px; padding: 25px 0; background: rgba(0,0,0,0.6); border-bottom: 1px solid #222; position: sticky; top: 35px; z-index: 900; backdrop-filter: blur(10px); }
-        .tab-item { cursor: pointer; font-weight: 900; font-size: 0.7rem; letter-spacing: 2px; color: #555; transition: 0.3s; }
+        .tab-item { cursor: pointer; font-weight: 900; font-size: 0.7rem; color: #555; }
         .tab-item.active { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 5px; }
 
         .container { padding: 20px 10px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
 
-        /* GRID - IMÁGENES COMPLETAS */
-        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .product-card { background: rgba(0, 0, 0, 0.4); border: 1px solid #111; cursor: pointer; display: flex; flex-direction: column; }
-        .product-card img { width: 100%; height: auto; display: block; object-fit: contain; }
-        .card-info { padding: 10px; text-align: center; font-size: 0.7rem; font-weight: 900; background: #000; }
+        /* GRID PRODUCTOS */
+        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .product-card { background: rgba(0, 0, 0, 0.4); border: 1px solid #111; cursor: pointer; position: relative; overflow: hidden; }
+        
+        /* ETIQUETA DE STOCK LIMITADO */
+        .stock-tag { position: absolute; top: 10px; left: 10px; background: #ff0000; color: #fff; font-size: 0.5rem; padding: 4px 8px; font-weight: 900; z-index: 2; border-radius: 2px; letter-spacing: 1px; }
 
-        /* SECCIÓN DISEÑOS */
-        #section-diseños { display: none; padding: 40px 0; }
-        .digital-card { background: rgba(10, 10, 10, 0.8); border: 1px dashed #444; max-width: 400px; margin: 0 auto; border-radius: 10px; text-align: center; }
-        .digital-header { padding: 40px 20px; border-bottom: 1px solid #222; }
-        .digital-body { padding: 30px 20px; }
+        .product-card img { width: 100%; height: auto; display: block; object-fit: contain; }
+        .card-info { padding: 12px; text-align: center; font-size: 0.7rem; font-weight: 900; background: #000; }
 
         /* MODAL */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; z-index: 2000; overflow-y: auto; }
-        .modal-content { padding: 20px; max-width: 500px; margin: 0 auto; padding-bottom: 100px; }
-        .close-modal { position: fixed; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; z-index: 2100; color: #fff; }
-        .modal-img { width: 100%; height: auto; object-fit: contain; margin-bottom: 20px; }
+        .modal-content { padding: 25px; max-width: 450px; margin: 0 auto; box-sizing: border-box; } /* box-sizing evita que se salga el contenido */
+        .close-modal { position: fixed; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; z-index: 2100; }
+        .modal-img { width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px; }
         
-        .btn-bbva { background: #004481; color: #fff; border: none; width: 100%; padding: 20px; font-weight: 900; border-radius: 8px; cursor: pointer; display: block; text-decoration: none; text-align: center; margin-bottom: 15px; }
-        .btn-wa { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 15px; font-weight: 900; border-radius: 8px; cursor: pointer; width: 100%; }
+        /* BOTÓN AZUL CORREGIDO */
+        .btn-bbva { 
+            background: #004481; 
+            color: #fff; 
+            border: none; 
+            width: 100%; 
+            padding: 18px 10px; /* Ajuste interno */
+            font-weight: 900; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            display: block; 
+            text-decoration: none; 
+            text-align: center; 
+            margin-bottom: 12px; 
+            box-sizing: border-box; /* Esto hace que el padding no lo ensanche */
+            transition: 0.3s;
+            font-size: 0.85rem;
+        }
+        .btn-bbva:active { transform: scale(0.98); background: #003366; }
 
-        footer { padding: 60px 20px; text-align: center; color: #222; font-size: 0.5rem; letter-spacing: 3px; }
+        .btn-wa { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 15px; font-weight: 900; border-radius: 12px; cursor: pointer; box-sizing: border-box; }
+
+        footer { padding: 40px; text-align: center; color: #222; font-size: 0.5rem; }
     </style>
 </head>
 <body>
@@ -67,13 +81,10 @@
         </video>
     </div>
 
-    <div class="announcement">ENVÍOS NACIONALES — PACKS DIGITALES DISPONIBLES</div>
+    <div class="announcement">STOCK LIMITADO — ENVÍOS A TODO MÉXICO</div>
 
     <section class="hero">
-        <div>
-            <h1>Grax</h1>
-            <p>ESTUDIO MÉXICO 2026</p>
-        </div>
+        <div><h1>Grax</h1></div>
     </section>
 
     <div class="nav-tabs">
@@ -84,10 +95,12 @@
     <div class="container">
         <div id="section-prendas" class="products-grid">
             <div class="product-card" onclick="openProduct('7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg')">
+                <div class="stock-tag">SOLO 5 PIEZAS</div>
                 <img src="7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg">
                 <div class="card-info">$450 MXN</div>
             </div>
             <div class="product-card" onclick="openProduct('63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg')">
+                <div class="stock-tag">DROP FINAL</div>
                 <img src="63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg">
                 <div class="card-info">$450 MXN</div>
             </div>
@@ -105,19 +118,12 @@
             </div>
         </div>
 
-        <div id="section-diseños">
-            <div class="digital-card">
-                <div class="digital-header">
-                    <div style="font-family: 'UnifrakturMaguntia'; font-size: 2.5rem;">Grax Vol. 1</div>
-                    <p style="font-size: 0.5rem; letter-spacing: 4px; color: #555;">PACK DIGITAL</p>
-                </div>
-                <div class="digital-body">
-                    <p style="font-size: 0.6rem; color: #777; line-height: 1.6; margin-bottom: 25px;">
-                        10 GRÁFICOS STREETWEAR EN ALTA RESOLUCIÓN.
-                    </p>
-                    <div style="font-size: 1.8rem; font-weight: 900; margin-bottom: 25px;">$200.00 MXN</div>
-                    <a href="#" class="btn-bbva">COMPRAR</a>
-                </div>
+        <div id="section-diseños" style="display:none;">
+            <div style="background: rgba(10,10,10,0.8); border: 1px dashed #444; padding: 40px; text-align: center; border-radius: 15px;">
+                <h2 style="font-family: 'UnifrakturMaguntia'; font-size: 2rem;">PACK VOL. 1</h2>
+                <p style="color: #666; font-size: 0.7rem;">10 ASSETS DIGITALES</p>
+                <div style="font-size: 1.5rem; margin: 20px 0;">$200.00 MXN</div>
+                <a href="#" class="btn-bbva" style="max-width: 250px; margin: 0 auto;">ADQUIRIR PACK</a>
             </div>
         </div>
     </div>
@@ -126,29 +132,26 @@
         <span class="close-modal" onclick="closeProduct()">&times;</span>
         <div class="modal-content">
             <img id="modalImg" class="modal-img" src="">
-            <h2 style="margin: 0; font-size: 1.5rem;">PREMIUM OVERSIZE TEE</h2>
-            <div style="font-size: 1.8rem; font-weight: 900; margin: 15px 0;">$450.00</div>
-            <select id="talla" style="width: 100%; background: #111; color: #fff; padding: 15px; border: 1px solid #333; margin-bottom: 20px;">
+            <div style="font-size: 0.6rem; color: #555; margin-bottom: 5px;">ESTUDIO 2026</div>
+            <h2 style="margin: 0; font-size: 1.4rem;">PREMIUM TEE</h2>
+            <div style="font-size: 1.6rem; font-weight: 900; margin: 15px 0;">$450.00 MXN</div>
+            
+            <p style="font-size: 0.5rem; color: #444;">TALLA:</p>
+            <select id="talla" style="width: 100%; background: #111; color: #fff; padding: 15px; border: 1px solid #333; border-radius: 8px; margin-bottom: 20px; box-sizing: border-box;">
                 <option>S</option><option>M</option><option>L</option><option>XL</option>
             </select>
+
             <a href="#" class="btn-bbva">PAGAR CON BBVA</a>
-            <button class="btn-wa" onclick="enviarWA()">WHATSAPP</button>
+            <button class="btn-wa" onclick="enviarWA()">CONSULTAR WHATSAPP</button>
         </div>
     </div>
 
     <script>
         function showCategory(cat) {
-            const p = document.getElementById('section-prendas');
-            const d = document.getElementById('section-diseños');
-            const tp = document.getElementById('tab-prendas');
-            const td = document.getElementById('tab-diseños');
-            if(cat === 'prendas') {
-                p.style.display = 'grid'; d.style.display = 'none';
-                tp.classList.add('active'); td.classList.remove('active');
-            } else {
-                p.style.display = 'none'; d.style.display = 'block';
-                tp.classList.remove('active'); td.classList.add('active');
-            }
+            document.getElementById('section-prendas').style.display = (cat === 'prendas' ? 'grid' : 'none');
+            document.getElementById('section-diseños').style.display = (cat === 'diseños' ? 'block' : 'none');
+            document.getElementById('tab-prendas').classList.toggle('active', cat === 'prendas');
+            document.getElementById('tab-diseños').classList.toggle('active', cat === 'diseños');
         }
         function openProduct(img) {
             document.getElementById('modalImg').src = img;
@@ -161,7 +164,7 @@
         }
         function enviarWA() {
             const t = document.getElementById('talla').value;
-            window.open(`https://wa.me/529984081516?text=Hola! Quiero la talla ${t}`, '_blank');
+            window.open(`https://wa.me/529984081516?text=Me interesa la playera en talla ${t}`, '_blank');
         }
     </script>
 </body>
