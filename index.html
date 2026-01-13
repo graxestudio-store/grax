@@ -7,63 +7,66 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Inter:wght@400;700;900&display=swap');
 
-        /* CONFIGURACIÓN BASE */
+        /* BASE */
         body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; text-transform: uppercase; overflow-x: hidden; }
         
-        .announcement { background: #fff; color: #000; font-size: 0.6rem; padding: 10px; font-weight: 900; letter-spacing: 2px; text-align: center; position: sticky; top: 0; z-index: 1000; }
+        /* VIDEO DE FONDO */
+        .video-background {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; overflow: hidden; background: #000;
+        }
+        .video-background video {
+            min-width: 100%; min-height: 100%; width: auto; height: auto;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            filter: brightness(20%) grayscale(100%); /* Ajusta el brillo aquí */
+        }
 
-        /* SECCIÓN DE IMPACTO */
-        .hero { height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; border-bottom: 1px solid #111; }
-        .hero h1 { font-family: 'UnifrakturMaguntia', serif; font-size: clamp(4rem, 15vw, 7rem); margin: 0; line-height: 0.8; }
-        .hero p { letter-spacing: 10px; font-size: 0.6rem; color: #555; margin-top: 15px; }
+        .announcement { background: rgba(255, 255, 255, 0.9); color: #000; font-size: 0.6rem; padding: 10px; font-weight: 900; letter-spacing: 2px; text-align: center; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(5px); }
 
-        /* MENÚ DE NAVEGACIÓN */
-        .nav-tabs { display: flex; justify-content: center; gap: 40px; padding: 25px 0; background: #000; border-bottom: 1px solid #111; position: sticky; top: 35px; z-index: 900; }
-        .tab-item { cursor: pointer; font-weight: 900; font-size: 0.7rem; letter-spacing: 2px; color: #444; transition: 0.3s; }
+        /* HERO */
+        .hero { height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+        .hero h1 { font-family: 'UnifrakturMaguntia', serif; font-size: clamp(4rem, 15vw, 7rem); margin: 0; line-height: 0.8; text-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        .hero p { letter-spacing: 10px; font-size: 0.6rem; color: #888; margin-top: 15px; }
+
+        /* NAV TABS */
+        .nav-tabs { display: flex; justify-content: center; gap: 40px; padding: 25px 0; background: rgba(0,0,0,0.7); border-bottom: 1px solid #222; position: sticky; top: 35px; z-index: 900; backdrop-filter: blur(10px); }
+        .tab-item { cursor: pointer; font-weight: 900; font-size: 0.7rem; letter-spacing: 2px; color: #555; transition: 0.3s; }
         .tab-item.active { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 5px; }
 
-        .container { padding: 20px 10px; max-width: 1200px; margin: 0 auto; }
+        .container { padding: 20px 10px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
 
-        /* GRID CORREGIDA: FOTOS COMPLETAS */
+        /* PRODUCTOS CORREGIDOS */
         .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-        .product-card { background: #000; cursor: pointer; display: flex; flex-direction: column; }
-        
-        .product-card img { 
-            width: 100%; 
-            height: auto; 
-            display: block; 
-            object-fit: contain; /* Esto evita que se corten las imágenes */
-        }
-        
-        .card-info { padding: 15px 5px; text-align: center; font-size: 0.8rem; font-weight: 900; letter-spacing: 1px; }
+        .product-card { background: rgba(10, 10, 10, 0.5); border: 1px solid #222; cursor: pointer; backdrop-filter: blur(5px); transition: 0.3s; }
+        .product-card:hover { border-color: #fff; }
+        .product-card img { width: 100%; height: auto; display: block; object-fit: contain; }
+        .card-info { padding: 15px 5px; text-align: center; font-size: 0.75rem; font-weight: 900; letter-spacing: 1px; }
 
         /* SECCIÓN DISEÑOS */
         #section-diseños { display: none; padding: 40px 0; }
-        .digital-card { 
-            background: #0a0a0a; 
-            border: 1px solid #222; 
-            max-width: 400px; 
-            margin: 0 auto; 
-            border-radius: 10px; 
-            overflow: hidden; 
-        }
-        .digital-header { background: #111; padding: 40px 20px; text-align: center; border-bottom: 1px solid #222; }
-        .digital-body { padding: 30px 20px; }
+        .digital-card { background: rgba(10, 10, 10, 0.8); border: 1px dashed #444; max-width: 400px; margin: 0 auto; border-radius: 10px; backdrop-filter: blur(10px); }
+        .digital-header { padding: 40px 20px; text-align: center; border-bottom: 1px solid #222; }
+        .digital-body { padding: 30px 20px; text-align: center; }
 
         /* MODAL */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; z-index: 2000; overflow-y: auto; }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; z-index: 2000; overflow-y: auto; backdrop-filter: blur(10px); }
         .modal-content { padding: 20px; max-width: 500px; margin: 0 auto; padding-bottom: 100px; }
         .close-modal { position: fixed; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; z-index: 2100; color: #fff; }
-        .modal-img { width: 100%; height: auto; object-fit: contain; border-radius: 4px; margin-bottom: 20px; }
+        .modal-img { width: 100%; height: auto; object-fit: contain; margin-bottom: 20px; }
         
-        /* BOTONES */
         .btn-bbva { background: #004481; color: #fff; border: none; width: 100%; padding: 20px; font-weight: 900; border-radius: 8px; cursor: pointer; display: block; text-decoration: none; text-align: center; margin-bottom: 15px; font-size: 0.9rem; }
-        .btn-wa { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 15px; font-weight: 900; border-radius: 8px; cursor: pointer; font-size: 0.7rem; }
+        .btn-wa { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 15px; font-weight: 900; border-radius: 8px; cursor: pointer; width: 100%; font-size: 0.7rem; }
 
-        footer { padding: 60px 20px; text-align: center; color: #222; font-size: 0.6rem; letter-spacing: 3px; }
+        footer { padding: 60px 20px; text-align: center; color: #333; font-size: 0.5rem; letter-spacing: 3px; }
     </style>
 </head>
 <body>
+
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="fondo.mp4" type="video/mp4">
+        </video>
+    </div>
 
     <div class="announcement">ENVÍOS NACIONALES — DIGITAL ASSETS DISPONIBLES</div>
 
@@ -107,15 +110,14 @@
             <div class="digital-card">
                 <div class="digital-header">
                     <div style="font-family: 'UnifrakturMaguntia'; font-size: 2.5rem;">Grax Vol. 1</div>
-                    <p style="font-size: 0.5rem; letter-spacing: 4px; color: #666;">ASSET PACK DIGITAL</p>
+                    <p style="font-size: 0.5rem; letter-spacing: 4px; color: #555;">PACK DIGITAL</p>
                 </div>
                 <div class="digital-body">
-                    <p style="font-size: 0.65rem; color: #888; line-height: 1.6; margin-bottom: 20px;">
-                        INCLUYE 10 GRÁFICOS STREETWEAR EN ALTA RESOLUCIÓN (PNG + VECTOR). LISTOS PARA DTF Y SERIGRAFÍA.
+                    <p style="font-size: 0.6rem; color: #777; line-height: 1.6; margin-bottom: 25px;">
+                        10 GRÁFICOS STREETWEAR EXCLUSIVOS EN ALTA RESOLUCIÓN (PNG + VECTOR).
                     </p>
-                    <div style="font-size: 1.5rem; font-weight: 900; margin-bottom: 25px;">$200.00 MXN</div>
+                    <div style="font-size: 1.8rem; font-weight: 900; margin-bottom: 25px;">$200.00 MXN</div>
                     <a href="#" class="btn-bbva">COMPRAR PACK</a>
-                    <p style="font-size: 0.5rem; color: #333; text-align: center; margin-top: 10px;">ENVÍO INMEDIATO VÍA EMAIL</p>
                 </div>
             </div>
         </div>
@@ -125,11 +127,11 @@
         <span class="close-modal" onclick="closeProduct()">&times;</span>
         <div class="modal-content">
             <img id="modalImg" class="modal-img" src="">
+            <div style="font-size: 0.6rem; color: #ffcc00; margin-bottom: 10px;">★★★★★ 5.0</div>
             <h2 style="margin: 0; font-size: 1.5rem;">PREMIUM OVERSIZE TEE</h2>
             <div style="font-size: 1.8rem; font-weight: 900; margin: 15px 0;">$450.00 MXN</div>
             
-            <p style="font-size: 0.6rem; color: #555;">SELECCIONA TALLA:</p>
-            <select id="talla" style="width: 100%; background: #111; color: #fff; padding: 15px; border: 1px solid #333; margin-bottom: 20px;">
+            <select id="talla" style="width: 100%; background: #000; color: #fff; padding: 15px; border: 1px solid #333; margin-bottom: 20px;">
                 <option>CHICA (S)</option>
                 <option>MEDIANA (M)</option>
                 <option>GRANDE (G)</option>
