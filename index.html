@@ -8,65 +8,71 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Inter:wght@400;700;900&display=swap');
 
-        /* BASE */
+        /* CONFIGURACIÓN BASE */
         body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; text-transform: uppercase; overflow-x: hidden; }
 
-        /* VIDEO DE FONDO */
+        /* VIDEO DE FONDO DINÁMICO */
         .video-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; background: #000; }
-        .video-background video { min-width: 100%; min-height: 100%; width: auto; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); filter: brightness(30%) grayscale(100%); }
+        .video-background video { min-width: 100%; min-height: 100%; width: auto; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); filter: brightness(25%) grayscale(100%); }
 
-        /* PANTALLA DE ENTRADA */
-        #intro-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 5000; transition: opacity 1s; background: rgba(0,0,0,0.6); }
-        #intro-screen h1 { font-family: 'UnifrakturMaguntia', serif; font-size: 5rem; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
-        .enter-btn { margin-top: 20px; background: transparent; color: #fff; border: 1px solid #fff; padding: 15px 40px; font-weight: 900; letter-spacing: 5px; cursor: pointer; backdrop-filter: blur(5px); }
+        /* PANTALLA DE ENTRADA (INTRO) */
+        #intro-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; transition: opacity 1s; background: #000; }
+        #intro-screen h1 { font-family: 'UnifrakturMaguntia', serif; font-size: clamp(4rem, 15vw, 8rem); animation: pulse 2.5s infinite; margin: 0; }
+        @keyframes pulse { 0%, 100% { opacity: 0.3; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1); } }
+        .enter-btn { margin-top: 30px; background: transparent; color: #fff; border: 1px solid #fff; padding: 18px 50px; font-weight: 900; letter-spacing: 8px; cursor: pointer; backdrop-filter: blur(5px); transition: 0.4s; }
+        .enter-btn:hover { background: #fff; color: #000; letter-spacing: 12px; }
 
-        /* CARRITO ICONO */
-        .cart-icon { position: fixed; top: 65px; right: 20px; z-index: 1100; background: #fff; color: #000; padding: 10px 15px; border-radius: 50px; font-weight: 900; cursor: pointer; font-size: 0.8rem; box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+        /* NAVEGACIÓN Y TABS */
+        .announcement { background: #fff; color: #000; font-size: 0.6rem; padding: 12px; text-align: center; position: sticky; top: 0; z-index: 2000; font-weight: 900; letter-spacing: 3px; }
+        .nav-tabs { display: flex; justify-content: center; gap: 30px; padding: 25px 0; background: rgba(0,0,0,0.8); position: sticky; top: 38px; z-index: 1900; backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .tab-item { cursor: pointer; font-weight: 900; font-size: 0.75rem; color: #444; transition: 0.3s; letter-spacing: 2px; }
+        .tab-item.active { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 8px; }
+        .tab-item:hover { color: #888; }
 
-        /* SIDEBAR CARRITO */
-        .cart-sidebar { position: fixed; top: 0; right: -100%; width: 100%; max-width: 350px; height: 100%; background: #050505; z-index: 3000; transition: 0.4s; padding: 30px; box-sizing: border-box; border-left: 1px solid #222; }
+        /* CARRITO (ICONO Y SIDEBAR) */
+        .cart-icon { position: fixed; top: 75px; right: 20px; z-index: 2100; background: #fff; color: #000; padding: 12px 18px; border-radius: 50px; font-weight: 900; cursor: pointer; font-size: 0.85rem; box-shadow: 0 5px 20px rgba(255,255,255,0.1); transition: 0.3s; }
+        .cart-icon:active { transform: scale(0.9); }
+        .cart-sidebar { position: fixed; top: 0; right: -100%; width: 100%; max-width: 380px; height: 100%; background: #080808; z-index: 3000; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); padding: 40px; box-sizing: border-box; border-left: 1px solid #1a1a1a; box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
         .cart-sidebar.active { right: 0; }
-        .cart-items { margin-top: 30px; max-height: 60vh; overflow-y: auto; }
-        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #111; padding-bottom: 10px; font-size: 0.7rem; }
+        .cart-items { margin-top: 40px; max-height: 65vh; overflow-y: auto; padding-right: 10px; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid #151515; padding-bottom: 15px; }
 
-        /* TIENDA Y TABS */
-        .announcement { background: #fff; color: #000; font-size: 0.6rem; padding: 10px; text-align: center; position: sticky; top: 0; z-index: 1000; font-weight: 900; letter-spacing: 2px; }
-        .hero { height: 40vh; display: flex; align-items: center; justify-content: center; text-align: center; }
-        .nav-tabs { display: flex; justify-content: center; gap: 30px; padding: 25px 0; background: rgba(0,0,0,0.6); position: sticky; top: 35px; z-index: 900; backdrop-filter: blur(10px); }
-        .tab-item { cursor: pointer; font-weight: 900; font-size: 0.7rem; color: #555; transition: 0.3s; }
-        .tab-item.active { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 5px; }
+        /* GRID DE PRODUCTOS */
+        .container { padding: 40px 15px; max-width: 1200px; margin: 0 auto; min-height: 70vh; }
+        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .product-card { background: rgba(0,0,0,0.5); border: 1px solid #111; position: relative; cursor: pointer; overflow: hidden; transition: 0.3s; }
+        .product-card:hover { border-color: #333; }
+        .product-card img { width: 100%; height: auto; display: block; filter: grayscale(20%); transition: transform 0.6s; }
+        .product-card:hover img { transform: scale(1.05); filter: grayscale(0%); }
+        .stock-tag { position: absolute; top: 12px; left: 12px; background: #ff0000; color: #fff; font-size: 0.55rem; padding: 4px 8px; font-weight: 900; z-index: 10; letter-spacing: 1px; }
+        .card-info { padding: 15px; text-align: center; font-size: 0.8rem; background: #000; font-weight: 900; border-top: 1px solid #111; }
 
-        /* GRID */
-        .container { padding: 20px 10px; max-width: 1200px; margin: 0 auto; min-height: 50vh; }
-        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .product-card { background: rgba(0,0,0,0.4); border: 1px solid #111; position: relative; cursor: pointer; }
-        .product-card img { width: 100%; display: block; object-fit: contain; }
-        .stock-tag { position: absolute; top: 8px; left: 8px; background: red; font-size: 0.5rem; padding: 3px 6px; font-weight: 900; z-index: 5; }
-        .card-info { padding: 10px; text-align: center; font-size: 0.7rem; background: #000; font-weight: 900; }
+        /* SECCIÓN REDES SOCIALES (DISEÑO PREMIUM) */
+        .social-links-container { text-align: center; padding: 60px 20px; display: flex; flex-direction: column; gap: 20px; max-width: 450px; margin: 0 auto; }
+        .btn-social { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 22px; border-radius: 15px; text-decoration: none; color: #fff; font-weight: 900; font-size: 1.1rem; transition: 0.4s; position: relative; overflow: hidden; }
+        .btn-social i { font-size: 1.8rem; }
+        .btn-social:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
 
-        /* SECCIÓN REDES (ESTILO BOTONES COLOR) */
-        .social-links-container { text-align: center; padding: 40px 20px; display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 0 auto; }
-        .btn-social { display: flex; align-items: center; justify-content: center; gap: 15px; padding: 18px; border-radius: 12px; text-decoration: none; color: #fff; font-weight: 900; font-size: 1rem; transition: transform 0.3s; border: none; }
-        .btn-social:hover { transform: scale(1.05); }
-        
-        .ig-color { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
-        .tk-color { background: #000; border: 2px solid #fff !important; position: relative; }
-        .tk-color::after { content: ''; position: absolute; width: 100%; height: 100%; border-radius: 12px; border: 2px solid #ff0050; top: 2px; left: 2px; z-index: -1; }
+        .ig-color { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .tk-color { background: #000; border: 2px solid #fff !important; box-shadow: 4px 4px 0px #ff0050, -4px -4px 0px #00f2ea; }
         .wa-color { background: #25D366; }
 
-        /* MODAL */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; z-index: 4000; overflow-y: auto; }
-        .modal-content { padding: 25px; max-width: 450px; margin: 0 auto; box-sizing: border-box; }
-        .modal-img { width: 100%; margin-bottom: 20px; border-radius: 5px; }
+        /* SECCIÓN DISEÑOS DIGITALES */
+        .design-card { background: linear-gradient(145deg, #0a0a0a, #111); border: 1px dashed #333; padding: 50px 30px; border-radius: 20px; text-align: center; max-width: 600px; margin: 0 auto; }
+        .design-price { font-size: 2.5rem; font-weight: 900; margin: 25px 0; color: #fff; }
 
-        /* BOTONES */
-        .btn-bbva { background: #004481; color: #fff; border: none; width: 100%; padding: 18px; font-weight: 900; border-radius: 12px; display: block; text-decoration: none; text-align: center; margin-bottom: 12px; box-sizing: border-box; font-size: 0.85rem; }
-        .btn-wa { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 15px; font-weight: 900; border-radius: 12px; cursor: pointer; box-sizing: border-box; }
-        .btn-add { background: #fff; color: #000; border: none; width: 100%; padding: 18px; font-weight: 900; border-radius: 12px; margin-bottom: 10px; cursor: pointer; }
+        /* MODAL DE COMPRA */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; z-index: 5000; overflow-y: auto; padding: 20px; box-sizing: border-box; }
+        .modal-content { max-width: 450px; margin: 40px auto; background: #000; border: 1px solid #222; padding: 30px; border-radius: 15px; text-align: center; }
+        .modal-img { width: 100%; border-radius: 10px; margin-bottom: 20px; }
+        .talla-btn { width: 100%; background: #111; color: #fff; padding: 15px; border: 1px solid #333; border-radius: 10px; margin: 10px 0 25px; font-weight: 900; }
 
-        footer { padding: 40px; text-align: center; border-top: 1px solid #111; margin-top: 50px; }
-        .copyright { color: #222; font-size: 0.5rem; letter-spacing: 2px; }
+        /* BOTONES DE ACCIÓN */
+        .btn-main { background: #fff; color: #000; border: none; width: 100%; padding: 20px; font-weight: 900; border-radius: 12px; cursor: pointer; transition: 0.3s; margin-bottom: 10px; font-size: 0.9rem; }
+        .btn-main:hover { background: #ccc; }
+        .btn-checkout { background: #004481; color: #fff; border: none; width: 100%; padding: 20px; font-weight: 900; border-radius: 12px; cursor: pointer; display: block; text-decoration: none; font-size: 0.9rem; margin-top: 20px; }
+
+        footer { padding: 80px 20px; text-align: center; color: #222; font-size: 0.6rem; letter-spacing: 4px; border-top: 1px solid #0a0a0a; }
     </style>
 </head>
 <body>
@@ -76,26 +82,26 @@
     </div>
 
     <div id="intro-screen">
-        <h1>Grax</h1>
+        <h1 style="font-family: 'UnifrakturMaguntia';">Grax</h1>
         <button class="enter-btn" onclick="startStore()">Entrar</button>
     </div>
 
     <div class="cart-icon" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
 
     <div id="cart-sidebar" class="cart-sidebar">
-        <span style="font-size: 2rem; cursor: pointer;" onclick="toggleCart()">&times;</span>
-        <h2 style="font-family: 'UnifrakturMaguntia'; font-size: 2rem;">Carrito</h2>
+        <span style="font-size: 3rem; cursor: pointer; line-height: 1;" onclick="toggleCart()">&times;</span>
+        <h2 style="font-family: 'UnifrakturMaguntia'; font-size: 2.5rem; margin: 20px 0;">Carrito</h2>
         <div id="cart-items" class="cart-items"></div>
-        <div style="border-top: 1px solid #222; padding-top: 20px;">
-            <p style="font-weight: 900;">Total: <span id="cart-total">$0</span> MXN</p>
-            <button class="btn-bbva" onclick="checkoutWA()">Finalizar pedido (WhatsApp)</button>
+        <div style="border-top: 1px solid #222; padding-top: 25px; margin-top: 20px;">
+            <p style="font-size: 1.2rem; font-weight: 900; display: flex; justify-content: space-between;">TOTAL: <span id="cart-total">$0</span></p>
+            <button class="btn-checkout" onclick="checkoutWA()">PEDIR POR WHATSAPP</button>
         </div>
     </div>
 
-    <div class="announcement">STOCK LIMITADO — ENVÍOS A TODO MÉXICO</div>
+    <div class="announcement">STOCK LIMITADO — ENVÍOS A TODO MÉXICO — GRAX ESTUDIO</div>
 
     <div class="hero">
-        <h1 style="font-family: 'UnifrakturMaguntia'; font-size: 5rem;">Grax</h1>
+        <h1 style="font-family: 'UnifrakturMaguntia'; font-size: clamp(3rem, 12vw, 6rem); margin: 0;">Grax</h1>
     </div>
 
     <div class="nav-tabs">
@@ -105,17 +111,44 @@
     </div>
 
     <div class="container">
+        
         <div id="section-prendas" class="products-grid">
             <div class="product-card" onclick="openProduct('7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg', 'Premium Tee Black', 450, 'SOLO 5 PIEZAS')">
                 <div class="stock-tag">SOLO 5 PIEZAS</div>
                 <img src="7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg">
                 <div class="card-info">$450 MXN</div>
             </div>
+            <div class="product-card" onclick="openProduct('63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg', 'Logo Tee Grey', 450, 'DROP FINAL')">
+                <div class="stock-tag">DROP FINAL</div>
+                <img src="63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg">
+                <div class="card-info">$450 MXN</div>
             </div>
+            <div class="product-card" onclick="openProduct('6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg', 'Studio Tee White', 450, '')">
+                <img src="6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg">
+                <div class="card-info">$450 MXN</div>
+            </div>
+            <div class="product-card" onclick="openProduct('7E33407F-C7DE-4065-8568-19B79A48809B.jpeg', 'Grax Signature', 450, '')">
+                <img src="7E33407F-C7DE-4065-8568-19B79A48809B.jpeg">
+                <div class="card-info">$450 MXN</div>
+            </div>
+            <div class="product-card" onclick="openProduct('EDC1E25D-01D1-454C-A254-A915941FB790.jpeg', 'Vintage Grax', 450, '')">
+                <img src="EDC1E25D-01D1-454C-A254-A915941FB790.jpeg">
+                <div class="card-info">$450 MXN</div>
+            </div>
+        </div>
+
+        <div id="section-diseños" style="display:none;">
+            <div class="design-card">
+                <h2 style="font-family: 'UnifrakturMaguntia'; font-size: 3rem; margin: 0;">Grax Assets Vol. 1</h2>
+                <p style="letter-spacing: 4px; color: #555; margin-top: 10px;">PACK DIGITAL - 10 ELEMENTOS</p>
+                <div class="design-price">$200 MXN</div>
+                <button class="btn-main" onclick="openProduct('7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg', 'Pack Diseños Vol. 1', 200, 'DIGITAL')">Añadir al Carrito</button>
+            </div>
+        </div>
 
         <div id="section-redes" style="display:none;">
             <div class="social-links-container">
-                <h2 style="font-family: 'UnifrakturMaguntia';">Social Links</h2>
+                <h2 style="font-family: 'UnifrakturMaguntia'; font-size: 2.5rem; margin-bottom: 20px;">@GRAX_ESTUDIO</h2>
                 
                 <a href="https://www.instagram.com/grax_estudio/" target="_blank" class="btn-social ig-color">
                     <i class="fab fa-instagram"></i> INSTAGRAM
@@ -130,88 +163,127 @@
                 </a>
             </div>
         </div>
+
     </div>
 
     <div id="productModal" class="modal">
-        <span style="position:fixed; top:20px; right:20px; font-size:3rem; cursor:pointer;" onclick="closeProduct()">&times;</span>
         <div class="modal-content">
             <img id="modalImg" class="modal-img">
-            <h2 id="modalTitle">PRODUCTO</h2>
-            <div id="modalPrice">$0</div>
-            <button class="btn-add" onclick="addToCart()">Añadir al Carrito</button>
-            <button class="btn-wa" onclick="closeProduct()">Cerrar</button>
+            <h2 id="modalTitle" style="margin: 0; font-family: 'UnifrakturMaguntia'; font-size: 2rem;"></h2>
+            <div id="modalPrice" style="font-size: 1.5rem; font-weight: 900; margin: 20px 0;"></div>
+            
+            <div id="talla-area">
+                <label style="font-size: 0.7rem; letter-spacing: 2px;">SELECCIONA TALLA:</label>
+                <select id="talla" class="talla-btn">
+                    <option>S</option><option>M</option><option>L</option><option>XL</option>
+                </select>
+            </div>
+
+            <button class="btn-main" onclick="addToCart()">AÑADIR AL CARRITO</button>
+            <button style="background:transparent; color:#555; border:none; cursor:pointer; font-weight:900;" onclick="closeProduct()">VOLVER</button>
         </div>
     </div>
 
-    <footer>
-        <div class="copyright">GRAX ESTUDIO © 2026</div>
-    </footer>
+    <footer>GRAX ESTUDIO © 2026 — ALL RIGHTS RESERVED</footer>
 
     <script>
-        let cart = JSON.parse(localStorage.getItem('grax_cart')) || [];
+        let cart = JSON.parse(localStorage.getItem('grax_store_cart')) || [];
         let currentProduct = {};
 
         function startStore() {
-            document.getElementById('intro-screen').style.opacity = '0';
-            setTimeout(() => { document.getElementById('intro-screen').style.display = 'none'; }, 1000);
+            const intro = document.getElementById('intro-screen');
+            intro.style.opacity = '0';
+            setTimeout(() => intro.style.display = 'none', 1000);
         }
 
         function showCategory(cat) {
+            // Ocultar todos
             document.getElementById('section-prendas').style.display = 'none';
+            document.getElementById('section-diseños').style.display = 'none';
             document.getElementById('section-redes').style.display = 'none';
+            
+            // Desactivar tabs
             document.getElementById('tab-prendas').classList.remove('active');
+            document.getElementById('tab-diseños').classList.remove('active');
             document.getElementById('tab-redes').classList.remove('active');
 
-            if(cat === 'prendas') {
-                document.getElementById('section-prendas').style.display = 'grid';
-                document.getElementById('tab-prendas').classList.add('active');
-            } else if(cat === 'redes') {
-                document.getElementById('section-redes').style.display = 'block';
-                document.getElementById('tab-redes').classList.add('active');
-            }
+            // Mostrar activo
+            document.getElementById('section-' + cat).style.display = (cat === 'prendas' ? 'grid' : 'block');
+            document.getElementById('tab-' + cat).classList.add('active');
         }
 
-        function openProduct(img, title, price) {
+        function openProduct(img, title, price, tag) {
             currentProduct = { img, title, price };
             document.getElementById('modalImg').src = img;
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalPrice').innerText = `$${price} MXN`;
+            
+            // Ocultar talla si es producto digital
+            document.getElementById('talla-area').style.display = (tag === 'DIGITAL' ? 'none' : 'block');
+            
             document.getElementById('productModal').style.display = "block";
+            document.body.style.overflow = "hidden";
         }
 
-        function closeProduct() { document.getElementById('productModal').style.display = "none"; }
+        function closeProduct() {
+            document.getElementById('productModal').style.display = "none";
+            document.body.style.overflow = "auto";
+        }
 
         function addToCart() {
-            cart.push({ ...currentProduct, talla: "Única" });
+            const tallaSelector = document.getElementById('talla');
+            const talla = document.getElementById('talla-area').style.display === 'none' ? 'DIGITAL' : tallaSelector.value;
+            
+            cart.push({ ...currentProduct, talla });
             updateCart();
             closeProduct();
             toggleCart();
         }
 
         function updateCart() {
-            localStorage.setItem('grax_cart', JSON.stringify(cart));
+            localStorage.setItem('grax_store_cart', JSON.stringify(cart));
             document.getElementById('cart-count').innerText = cart.length;
             const container = document.getElementById('cart-items');
             container.innerHTML = '';
             let total = 0;
+
             cart.forEach((item, index) => {
                 total += item.price;
-                container.innerHTML += `<div class="cart-item">
-                    <div><b>${item.title}</b></div>
-                    <div>$${item.price} <span style="color:red; cursor:pointer;" onclick="removeItem(${index})">X</span></div>
-                </div>`;
+                container.innerHTML += `
+                    <div class="cart-item">
+                        <div>
+                            <span style="font-weight:900; font-size:0.8rem;">${item.title}</span><br>
+                            <span style="font-size:0.6rem; color:#666;">Talla: ${item.talla}</span>
+                        </div>
+                        <div style="font-weight:900;">
+                            $${item.price}
+                            <i class="fas fa-trash" style="color:red; margin-left:15px; cursor:pointer;" onclick="removeItem(${index})"></i>
+                        </div>
+                    </div>`;
             });
-            document.getElementById('cart-total').innerText = `$${total}`;
+            document.getElementById('cart-total').innerText = `$${total} MXN`;
         }
 
-        function removeItem(index) { cart.splice(index, 1); updateCart(); }
-        function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('active'); }
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('active');
+        }
+
         function checkoutWA() {
-            let msg = "Hola GRAX! Pedido:%0A";
-            cart.forEach(item => msg += `- ${item.title}%0A`);
-            window.open(`https://wa.me/529984081516?text=${msg}`, '_blank');
+            if (cart.length === 0) return alert("Tu carrito está vacío.");
+            let message = "¡Hola GRAX! Me gustaría ordenar:%0A%0A";
+            cart.forEach(item => {
+                message += `• ${item.title} (${item.talla}) - $${item.price}%0A`;
+            });
+            message += `%0A*TOTAL: ${document.getElementById('cart-total').innerText}*`;
+            window.open(`https://wa.me/529984081516?text=${message}`, '_blank');
         }
 
+        // Inicializar
         updateCart();
     </script>
 </body>
