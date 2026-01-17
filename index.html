@@ -8,102 +8,170 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Inter:wght@400;700;900&display=swap');
         body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; text-transform: uppercase; overflow-x: hidden; }
+        
+        /* VIDEO FONDO */
         .video-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #000; }
-        .video-background video { min-width: 100%; min-height: 100%; width: auto; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); filter: brightness(25%) grayscale(100%); }
+        .video-background video { min-width: 100%; min-height: 100%; width: auto; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); filter: brightness(30%); }
+
+        /* INTRO */
         #intro-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; background: #000; transition: opacity 0.8s; }
-        #intro-screen h1 { font-family: 'UnifrakturMaguntia', serif; font-size: 5rem; margin: 0; }
-        .enter-btn { margin-top: 20px; border: 1px solid #fff; background: transparent; color: #fff; padding: 15px 40px; cursor: pointer; font-weight: 900; letter-spacing: 5px; transition: 0.3s; }
-        .announcement { background: #fff; color: #000; font-size: 10px; padding: 10px; text-align: center; font-weight: 900; position: sticky; top: 0; z-index: 1000; letter-spacing: 2px; }
-        .nav-tabs { display: flex; justify-content: center; gap: 30px; padding: 20px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); position: sticky; top: 35px; z-index: 900; border-bottom: 1px solid #111; }
-        .tab-item { cursor: pointer; font-size: 11px; font-weight: 900; color: #444; transition: 0.3s; }
-        .tab-item.active { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 5px; }
-        .social-container { display: none; padding: 40px 10px; text-align: center; max-width: 400px; margin: 0 auto; }
-        .social-btn { display: flex; align-items: center; justify-content: center; gap: 15px; padding: 20px; margin-bottom: 15px; border-radius: 12px; text-decoration: none; color: #fff !important; font-weight: 900; font-size: 14px; transition: 0.3s; }
-        .ig { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
-        .tk { background: #000; border: 2px solid #fff; }
-        .wa { background: #25D366; }
-        .container { padding: 30px 15px; max-width: 1200px; margin: 0 auto; min-height: 60vh; }
+        #intro-screen h1 { font-family: 'UnifrakturMaguntia', serif; font-size: 5rem; color: #fff; }
+        .enter-btn { border: 1px solid #fff; background: transparent; color: #fff; padding: 15px 40px; cursor: pointer; font-weight: 900; letter-spacing: 5px; }
+
+        /* NAV */
+        .announcement { background: #fff; color: #000; font-size: 10px; padding: 10px; text-align: center; font-weight: 900; position: sticky; top: 0; z-index: 1000; }
+        .nav-tabs { display: flex; justify-content: center; gap: 20px; padding: 20px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); position: sticky; top: 35px; z-index: 900; }
+        .tab-item { cursor: pointer; font-size: 11px; font-weight: 900; color: #444; }
+        .tab-item.active { color: #fff; border-bottom: 2px solid #fff; }
+
+        /* TIENDA */
+        .container { padding: 20px; max-width: 1200px; margin: 0 auto; }
         .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .card { background: rgba(0,0,0,0.5); border: 1px solid #111; cursor: pointer; }
+        .card { background: #0a0a0a; border: 1px solid #111; cursor: pointer; text-align: center; }
         .card img { width: 100%; height: auto; display: block; }
-        .price-tag { text-align: center; font-size: 11px; padding: 12px; font-weight: 900; background: #000; }
+        .price { font-size: 11px; padding: 10px; font-weight: 900; }
+
+        /* CARRITO SIDEBAR */
         .cart-icon { position: fixed; top: 60px; right: 20px; z-index: 1100; background: #fff; color: #000; padding: 10px 15px; border-radius: 50px; cursor: pointer; font-weight: 900; }
         .sidebar { position: fixed; top: 0; right: -100%; width: 100%; max-width: 350px; height: 100%; background: #050505; z-index: 3000; transition: 0.4s; padding: 30px; border-left: 1px solid #222; box-sizing: border-box; }
         .sidebar.active { right: 0; }
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; z-index: 5000; overflow-y: auto; padding: 30px; box-sizing: border-box; }
+
+        /* REDES */
+        .social-container { display: none; padding: 50px 20px; text-align: center; max-width: 400px; margin: 0 auto; }
+        .social-btn { display: block; padding: 20px; margin-bottom: 15px; border-radius: 10px; text-decoration: none; color: #fff !important; font-weight: 900; transition: 0.3s; }
+        .ig { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
+        .tk { background: #000; border: 2px solid #fff; }
+        .wa { background: #25D366; }
+
+        /* MODAL */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; z-index: 5000; padding: 20px; box-sizing: border-box; overflow-y: auto; }
         .modal-content { max-width: 400px; margin: 0 auto; text-align: center; }
-        .modal-img { width: 100%; margin-bottom: 20px; }
-        .btn-add { background: #fff; color: #000; border: none; width: 100%; padding: 20px; font-weight: 900; cursor: pointer; border-radius: 10px; margin-top: 15px; }
+        .modal-img { width: 100%; border-radius: 10px; }
+        .btn-add { background: #fff; color: #000; border: none; width: 100%; padding: 20px; font-weight: 900; cursor: pointer; margin-top: 15px; }
     </style>
 </head>
 <body>
-    <div class="video-background"><video autoplay muted loop playsinline><source src="video_grax.mp4.mp4" type="video/mp4"></video></div>
-    <div id="intro-screen"><h1 style="font-family:'UnifrakturMaguntia';">Grax</h1><button class="enter-btn" onclick="start()">ENTRAR</button></div>
-    <div class="cart-icon" onclick="toggleCart()">🛒 <span id="count">0</span></div>
-    <div id="sidebar" class="sidebar">
-        <h2 style="font-family:'UnifrakturMaguntia'; font-size:2rem;">CARRITO</h2>
-        <div id="cart-list"></div>
-        <p style="font-weight:900;">TOTAL: <span id="total">$0</span></p>
-        <button onclick="checkout()" style="width:100%; padding:20px; background:#004481; color:#fff; border:none; font-weight:900; border-radius:10px; cursor:pointer;">WHATSAPP</button>
-        <button onclick="toggleCart()" style="background:none; color:#555; border:none; margin-top:10px; cursor:pointer; width:100%;">CERRAR</button>
+
+    <div class="video-background">
+        <video autoplay muted loop playsinline><source src="video_grax.mp4.mp4" type="video/mp4"></video>
     </div>
-    <div class="announcement">GRAX ESTUDIO — STOCK LIMITADO — ENVÍOS A MÉXICO</div>
+
+    <div id="intro-screen">
+        <h1>GRAX</h1>
+        <button class="enter-btn" onclick="start()">ENTRAR</button>
+    </div>
+
+    <div class="cart-icon" onclick="toggleCart()">🛒 <span id="count">0</span></div>
+
+    <div id="sidebar" class="sidebar">
+        <h2 style="font-family:'UnifrakturMaguntia';">CARRITO</h2>
+        <div id="cart-list"></div>
+        <p>TOTAL: <span id="total">$0</span></p>
+        <button onclick="checkout()" style="width:100%; padding:20px; background:#004481; color:#fff; border:none; font-weight:900; cursor:pointer;">WHATSAPP</button>
+        <button onclick="toggleCart()" style="width:100%; margin-top:10px; background:none; color:#555; border:none; cursor:pointer;">CERRAR</button>
+    </div>
+
+    <div class="announcement">STOCK LIMITADO — ENVÍOS A MÉXICO</div>
+
     <div class="nav-tabs">
         <div id="t1" class="tab-item active" onclick="tab('prendas')">PRENDAS</div>
         <div id="t2" class="tab-item" onclick="tab('diseños')">DISEÑOS</div>
         <div id="t3" class="tab-item" onclick="tab('redes')">REDES</div>
     </div>
+
     <div class="container">
         <div id="s-prendas" class="products-grid">
-            <div class="card" onclick="view('7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg', 'Premium Tee Black', 450)"><img src="7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg"><div class="price-tag">$450 MXN</div></div>
-            <div class="card" onclick="view('63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg', 'Logo Tee Grey', 450)"><img src="63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg"><div class="price-tag">$450 MXN</div></div>
+            <div class="card" onclick="view('7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg', 'Premium Tee Black', 450)">
+                <img src="7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg"><div class="price">$450 MXN</div>
+            </div>
+            <div class="card" onclick="view('63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg', 'Logo Tee Grey', 450)">
+                <img src="63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg"><div class="price">$450 MXN</div>
+            </div>
+            <div class="card" onclick="view('6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg', 'Studio Tee White', 450)">
+                <img src="6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg"><div class="price">$450 MXN</div>
+            </div>
+            <div class="card" onclick="view('7E33407F-C7DE-4065-8568-19B79A48809B.jpeg', 'Grax Signature', 450)">
+                <img src="7E33407F-C7DE-4065-8568-19B79A48809B.jpeg"><div class="price">$450 MXN</div>
+            </div>
+            <div class="card" onclick="view('EDC1E25D-01D1-454C-A254-A915941FB790.jpeg', 'Vintage Grax', 450)">
+                <img src="EDC1E25D-01D1-454C-A254-A915941FB790.jpeg"><div class="price">$450 MXN</div>
+            </div>
         </div>
+
         <div id="s-diseños" style="display:none; text-align:center;">
             <div style="border:1px dashed #444; padding:50px;">
-                <h2 style="font-family:'UnifrakturMaguntia'; font-size:2rem;">Pack Vol. 1</h2>
+                <h2 style="font-family:'UnifrakturMaguntia';">Pack Vol. 1</h2>
+                <p>$200 MXN</p>
                 <button class="btn-add" onclick="view('7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg', 'Pack Digital', 200)">VER DETALLE</button>
             </div>
         </div>
+
         <div id="s-redes" class="social-container">
-            <h2 style="font-family:'UnifrakturMaguntia'; font-size:2.5rem; margin-bottom:20px;">GRAX ESTUDIO</h2>
-            <a href="https://www.instagram.com/grax_estudio/" target="_blank" class="social-btn ig"><i class="fab fa-instagram"></i> INSTAGRAM</a>
-            <a href="https://www.tiktok.com/@grax_estudio" target="_blank" class="social-btn tk"><i class="fab fa-tiktok"></i> TIKTOK</a>
-            <a href="https://wa.me/529984081516" target="_blank" class="social-btn wa"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+            <h2 style="font-family:'UnifrakturMaguntia'; margin-bottom:30px;">GRAX ESTUDIO</h2>
+            <a href="https://www.instagram.com/grax_estudio" target="_blank" class="social-btn ig">INSTAGRAM</a>
+            <a href="https://www.tiktok.com/@grax_estudio" target="_blank" class="social-btn tk">TIKTOK</a>
+            <a href="https://wa.me/529984081516" target="_blank" class="social-btn wa">WHATSAPP</a>
         </div>
     </div>
+
     <div id="modal" class="modal">
         <div class="modal-content">
             <img id="m-img" class="modal-img">
             <h2 id="m-title"></h2>
             <p id="m-price" style="font-weight:900; font-size:24px;"></p>
-            <select id="m-talla" style="width:100%; padding:15px; background:#111; color:#fff; border:1px solid #333; border-radius:10px;"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+            <select id="m-talla" style="width:100%; padding:15px; background:#111; color:#fff; border:1px solid #333;">
+                <option>S</option><option>M</option><option>L</option><option>XL</option>
+            </select>
             <button class="btn-add" onclick="add()">AÑADIR AL CARRITO</button>
             <button onclick="closeModal()" style="background:none; color:#555; border:none; margin-top:20px; cursor:pointer;">CERRAR</button>
         </div>
     </div>
+
     <script>
-        let cart = []; let tempItem = {};
-        function start() { document.getElementById('intro-screen').style.opacity = '0'; setTimeout(() => { document.getElementById('intro-screen').style.display='none'; }, 800); }
+        let cart = []; let temp = {};
+        function start() { document.getElementById('intro-screen').style.opacity='0'; setTimeout(()=>document.getElementById('intro-screen').style.display='none', 800); }
         function tab(n) {
-            document.getElementById('s-prendas').style.display = (n === 'prendas' ? 'grid' : 'none');
-            document.getElementById('s-diseños').style.display = (n === 'diseños' ? 'block' : 'none');
-            document.getElementById('s-redes').style.display = (n === 'redes' ? 'block' : 'none');
-            document.getElementById('t1').classList.toggle('active', n === 'prendas');
-            document.getElementById('t2').classList.toggle('active', n === 'diseños');
-            document.getElementById('t3').classList.toggle('active', n === 'redes');
+            document.getElementById('s-prendas').style.display = (n==='prendas'?'grid':'none');
+            document.getElementById('s-diseños').style.display = (n==='diseños'?'block':'none');
+            document.getElementById('s-redes').style.display = (n==='redes'?'block':'none');
+            document.getElementById('t1').className = (n==='prendas'?'tab-item active':'tab-item');
+            document.getElementById('t2').className = (n==='diseños'?'tab-item active':'tab-item');
+            document.getElementById('t3').className = (n==='redes'?'tab-item active':'tab-item');
         }
-        function view(i, t, p) { tempItem = { i, t, p }; document.getElementById('m-img').src = i; document.getElementById('m-title').innerText = t; document.getElementById('m-price').innerText = `$${p} MXN`; document.getElementById('modal').style.display = 'block'; }
+        function view(img, title, price) {
+            temp = { img, title, price };
+            document.getElementById('m-img').src = img;
+            document.getElementById('m-title').innerText = title;
+            document.getElementById('m-price').innerText = `$${price} MXN`;
+            document.getElementById('modal').style.display = 'block';
+        }
         function closeModal() { document.getElementById('modal').style.display = 'none'; }
-        function add() { cart.push({...tempItem, talla: document.getElementById('m-talla').value}); update(); closeModal(); toggleCart(); }
+        function add() {
+            const talla = document.getElementById('m-talla').value;
+            cart.push({...temp, talla});
+            update(); closeModal(); toggleCart();
+        }
         function update() {
             document.getElementById('count').innerText = cart.length;
-            const list = document.getElementById('cart-list'); list.innerHTML = ''; let total = 0;
-            cart.forEach((i, idx) => { total += i.p; list.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:11px;"><span>${i.t} (${i.talla})</span><span onclick="del(${idx})" style="color:red; cursor:pointer;">X</span></div>`; });
-            document.getElementById('total').innerText = `$${total} MXN`;
+            const list = document.getElementById('cart-list');
+            list.innerHTML = ''; let t = 0;
+            cart.forEach((i, idx) => {
+                t += i.price;
+                list.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:11px;">
+                    <span>${i.title} (${i.talla})</span>
+                    <span onclick="del(${idx})" style="color:red; cursor:pointer;">X</span>
+                </div>`;
+            });
+            document.getElementById('total').innerText = `$${t} MXN`;
         }
         function del(i) { cart.splice(i, 1); update(); }
         function toggleCart() { document.getElementById('sidebar').classList.toggle('active'); }
-        function checkout() { if(cart.length === 0) return; let msg = "Hola GRAX! Mi pedido: "; cart.forEach(i => msg += `${i.t} (${i.talla}), `); window.open(`https://wa.me/529984081516?text=${encodeURIComponent(msg)}`, '_blank'); }
+        function checkout() {
+            if(cart.length===0) return;
+            let m = "Hola GRAX! Mi pedido: ";
+            cart.forEach(i => m += `${i.title} (${i.talla}), `);
+            window.open(`https://wa.me/529984081516?text=${encodeURIComponent(m)}`, '_blank');
+        }
     </script>
 </body>
 </html>
