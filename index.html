@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GRAX | ESTUDIO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Inter:wght@400;700;900&display=swap');
 
@@ -29,13 +30,12 @@
         .cart-items { margin-top: 30px; max-height: 60vh; overflow-y: auto; }
         .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #111; padding-bottom: 10px; font-size: 0.7rem; }
 
-        /* TIENDA */
+        /* TIENDA Y TABS */
         .announcement { background: #fff; color: #000; font-size: 0.6rem; padding: 10px; text-align: center; position: sticky; top: 0; z-index: 1000; font-weight: 900; letter-spacing: 2px; }
         .hero { height: 40vh; display: flex; align-items: center; justify-content: center; text-align: center; }
         .nav-tabs { display: flex; justify-content: center; gap: 30px; padding: 25px 0; background: rgba(0,0,0,0.6); position: sticky; top: 35px; z-index: 900; backdrop-filter: blur(10px); }
         .tab-item { cursor: pointer; font-weight: 900; font-size: 0.7rem; color: #555; transition: 0.3s; }
         .tab-item.active { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 5px; }
-        .tab-item:hover { color: #fff; }
 
         /* GRID */
         .container { padding: 20px 10px; max-width: 1200px; margin: 0 auto; min-height: 50vh; }
@@ -45,10 +45,15 @@
         .stock-tag { position: absolute; top: 8px; left: 8px; background: red; font-size: 0.5rem; padding: 3px 6px; font-weight: 900; z-index: 5; }
         .card-info { padding: 10px; text-align: center; font-size: 0.7rem; background: #000; font-weight: 900; }
 
-        /* SECCIÓN REDES */
-        .social-links-container { text-align: center; padding: 40px 20px; }
-        .social-link-card { display: block; background: #111; border: 1px solid #222; padding: 20px; margin-bottom: 15px; text-decoration: none; color: #fff; font-weight: 900; border-radius: 8px; transition: 0.3s; }
-        .social-link-card:hover { background: #fff; color: #000; transform: translateY(-3px); }
+        /* SECCIÓN REDES (ESTILO BOTONES COLOR) */
+        .social-links-container { text-align: center; padding: 40px 20px; display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 0 auto; }
+        .btn-social { display: flex; align-items: center; justify-content: center; gap: 15px; padding: 18px; border-radius: 12px; text-decoration: none; color: #fff; font-weight: 900; font-size: 1rem; transition: transform 0.3s; border: none; }
+        .btn-social:hover { transform: scale(1.05); }
+        
+        .ig-color { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+        .tk-color { background: #000; border: 2px solid #fff !important; position: relative; }
+        .tk-color::after { content: ''; position: absolute; width: 100%; height: 100%; border-radius: 12px; border: 2px solid #ff0050; top: 2px; left: 2px; z-index: -1; }
+        .wa-color { background: #25D366; }
 
         /* MODAL */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; z-index: 4000; overflow-y: auto; }
@@ -60,10 +65,7 @@
         .btn-wa { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 15px; font-weight: 900; border-radius: 12px; cursor: pointer; box-sizing: border-box; }
         .btn-add { background: #fff; color: #000; border: none; width: 100%; padding: 18px; font-weight: 900; border-radius: 12px; margin-bottom: 10px; cursor: pointer; }
 
-        footer { padding: 60px 40px; text-align: center; border-top: 1px solid #111; margin-top: 50px; }
-        .footer-socials { margin-bottom: 20px; display: flex; justify-content: center; gap: 20px; }
-        .footer-socials a { color: #444; text-decoration: none; font-size: 0.7rem; font-weight: 900; transition: 0.3s; }
-        .footer-socials a:hover { color: #fff; }
+        footer { padding: 40px; text-align: center; border-top: 1px solid #111; margin-top: 50px; }
         .copyright { color: #222; font-size: 0.5rem; letter-spacing: 2px; }
     </style>
 </head>
@@ -74,7 +76,7 @@
     </div>
 
     <div id="intro-screen">
-        <h1 style="font-family: 'UnifrakturMaguntia';">Grax</h1>
+        <h1>Grax</h1>
         <button class="enter-btn" onclick="startStore()">Entrar</button>
     </div>
 
@@ -109,40 +111,23 @@
                 <img src="7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg">
                 <div class="card-info">$450 MXN</div>
             </div>
-            <div class="product-card" onclick="openProduct('63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg', 'Logo Tee Grey', 450, 'DROP FINAL')">
-                <div class="stock-tag">DROP FINAL</div>
-                <img src="63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg">
-                <div class="card-info">$450 MXN</div>
             </div>
-            <div class="product-card" onclick="openProduct('6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg', 'Studio Tee White', 450, '')">
-                <img src="6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg">
-                <div class="card-info">$450 MXN</div>
-            </div>
-            <div class="product-card" onclick="openProduct('7E33407F-C7DE-4065-8568-19B79A48809B.jpeg', 'Grax Signature', 450, '')">
-                <img src="7E33407F-C7DE-4065-8568-19B79A48809B.jpeg">
-                <div class="card-info">$450 MXN</div>
-            </div>
-            <div class="product-card" onclick="openProduct('EDC1E25D-01D1-454C-A254-A915941FB790.jpeg', 'Vintage Grax', 450, '')">
-                <img src="EDC1E25D-01D1-454C-A254-A915941FB790.jpeg">
-                <div class="card-info">$450 MXN</div>
-            </div>
-        </div>
-
-        <div id="section-diseños" style="display:none; text-align: center;">
-            <div style="background: rgba(10,10,10,0.8); border: 1px dashed #444; padding: 40px; border-radius: 15px;">
-                <h2 style="font-family: 'UnifrakturMaguntia'; font-size: 2.5rem; margin:0;">Grax Vol. 1</h2>
-                <p style="color: #666; font-size: 0.7rem; letter-spacing: 3px;">PACK DIGITAL - 10 ASSETS</p>
-                <div style="font-size: 1.5rem; margin: 20px 0;">$200.00 MXN</div>
-                <button class="btn-bbva" style="max-width: 250px; margin: 0 auto;" onclick="openProduct('7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg', 'Pack Diseños Vol. 1', 200, 'DIGITAL')">Añadir al Carrito</button>
-            </div>
-        </div>
 
         <div id="section-redes" style="display:none;">
             <div class="social-links-container">
-                <h2 style="font-family: 'UnifrakturMaguntia'; margin-bottom: 30px;">Conecta con Grax</h2>
-                <a href="https://www.instagram.com/grax_estudio/" target="_blank" class="social-link-card">INSTAGRAM</a>
-                <a href="https://www.tiktok.com/@grax_estudio" target="_blank" class="social-link-card">TIKTOK</a>
-                <a href="https://wa.me/529984081516" target="_blank" class="social-link-card">WHATSAPP DIRECTO</a>
+                <h2 style="font-family: 'UnifrakturMaguntia';">Social Links</h2>
+                
+                <a href="https://www.instagram.com/grax_estudio/" target="_blank" class="btn-social ig-color">
+                    <i class="fab fa-instagram"></i> INSTAGRAM
+                </a>
+
+                <a href="https://www.tiktok.com/@grax_estudio" target="_blank" class="btn-social tk-color">
+                    <i class="fab fa-tiktok"></i> TIKTOK
+                </a>
+
+                <a href="https://wa.me/529984081516" target="_blank" class="btn-social wa-color">
+                    <i class="fab fa-whatsapp"></i> WHATSAPP
+                </a>
             </div>
         </div>
     </div>
@@ -151,24 +136,15 @@
         <span style="position:fixed; top:20px; right:20px; font-size:3rem; cursor:pointer;" onclick="closeProduct()">&times;</span>
         <div class="modal-content">
             <img id="modalImg" class="modal-img">
-            <h2 id="modalTitle" style="margin:0;">PRODUCTO</h2>
-            <div id="modalPrice" style="font-size: 1.5rem; font-weight:900; margin:10px 0;">$0</div>
-            <label style="font-size: 0.6rem; color:#555;">TALLA:</label>
-            <select id="talla" style="width: 100%; background: #111; color: #fff; padding: 15px; border: 1px solid #333; border-radius: 8px; margin: 10px 0 20px;">
-                <option>S</option><option>M</option><option>L</option><option>XL</option>
-            </select>
+            <h2 id="modalTitle">PRODUCTO</h2>
+            <div id="modalPrice">$0</div>
             <button class="btn-add" onclick="addToCart()">Añadir al Carrito</button>
             <button class="btn-wa" onclick="closeProduct()">Cerrar</button>
         </div>
     </div>
 
     <footer>
-        <div class="footer-socials">
-            <a href="https://www.instagram.com/grax_estudio/" target="_blank">IG</a>
-            <a href="https://www.tiktok.com/@grax_estudio" target="_blank">TK</a>
-            <a href="https://wa.me/529984081516" target="_blank">WA</a>
-        </div>
-        <div class="copyright">GRAX ESTUDIO © 2026 — ALL RIGHTS RESERVED</div>
+        <div class="copyright">GRAX ESTUDIO © 2026</div>
     </footer>
 
     <script>
@@ -181,46 +157,32 @@
         }
 
         function showCategory(cat) {
-            // Ocultar todas las secciones
             document.getElementById('section-prendas').style.display = 'none';
-            document.getElementById('section-diseños').style.display = 'none';
             document.getElementById('section-redes').style.display = 'none';
-            
-            // Quitar clase active de todos los tabs
             document.getElementById('tab-prendas').classList.remove('active');
-            document.getElementById('tab-diseños').classList.remove('active');
             document.getElementById('tab-redes').classList.remove('active');
 
-            // Mostrar sección elegida
             if(cat === 'prendas') {
                 document.getElementById('section-prendas').style.display = 'grid';
                 document.getElementById('tab-prendas').classList.add('active');
-            } else if(cat === 'diseños') {
-                document.getElementById('section-diseños').style.display = 'block';
-                document.getElementById('tab-diseños').classList.add('active');
             } else if(cat === 'redes') {
                 document.getElementById('section-redes').style.display = 'block';
                 document.getElementById('tab-redes').classList.add('active');
             }
         }
 
-        function openProduct(img, title, price, stock) {
+        function openProduct(img, title, price) {
             currentProduct = { img, title, price };
             document.getElementById('modalImg').src = img;
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalPrice').innerText = `$${price} MXN`;
             document.getElementById('productModal').style.display = "block";
-            document.body.style.overflow = "hidden";
         }
 
-        function closeProduct() {
-            document.getElementById('productModal').style.display = "none";
-            document.body.style.overflow = "auto";
-        }
+        function closeProduct() { document.getElementById('productModal').style.display = "none"; }
 
         function addToCart() {
-            const talla = document.getElementById('talla').value;
-            cart.push({ ...currentProduct, talla });
+            cart.push({ ...currentProduct, talla: "Única" });
             updateCart();
             closeProduct();
             toggleCart();
@@ -235,27 +197,18 @@
             cart.forEach((item, index) => {
                 total += item.price;
                 container.innerHTML += `<div class="cart-item">
-                    <div><b>${item.title}</b><br>Talla: ${item.talla}</div>
-                    <div>$${item.price} <span style="color:red; margin-left:10px; cursor:pointer;" onclick="removeItem(${index})">X</span></div>
+                    <div><b>${item.title}</b></div>
+                    <div>$${item.price} <span style="color:red; cursor:pointer;" onclick="removeItem(${index})">X</span></div>
                 </div>`;
             });
             document.getElementById('cart-total').innerText = `$${total}`;
         }
 
-        function removeItem(index) {
-            cart.splice(index, 1);
-            updateCart();
-        }
-
-        function toggleCart() {
-            document.getElementById('cart-sidebar').classList.toggle('active');
-        }
-
+        function removeItem(index) { cart.splice(index, 1); updateCart(); }
+        function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('active'); }
         function checkoutWA() {
-            if (cart.length === 0) return alert("Carrito vacío");
-            let msg = "Hola GRAX! Quiero estos productos:%0A";
-            cart.forEach(item => { msg += `- ${item.title} (${item.talla})%0A`; });
-            msg += `%0ATotal: ${document.getElementById('cart-total').innerText}`;
+            let msg = "Hola GRAX! Pedido:%0A";
+            cart.forEach(item => msg += `- ${item.title}%0A`);
             window.open(`https://wa.me/529984081516?text=${msg}`, '_blank');
         }
 
