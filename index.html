@@ -14,109 +14,164 @@
         .video-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; background: #000; }
         .video-background video { min-width: 100%; min-height: 100%; width: auto; height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); filter: brightness(30%) grayscale(100%); }
 
-        /* ICONO DEL CARRITO */
-        .cart-icon {
-            position: fixed; top: 60px; right: 20px; z-index: 1100;
-            background: #fff; color: #000; padding: 10px 15px;
-            border-radius: 50px; font-weight: 900; cursor: pointer;
-            box-shadow: 0 0 15px rgba(255,255,255,0.3);
-            display: flex; align-items: center; gap: 8px; font-size: 0.8rem;
-        }
+        /* PANTALLA DE ENTRADA */
+        #intro-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 5000; transition: opacity 1s; background: rgba(0,0,0,0.6); }
+        #intro-screen h1 { font-family: 'UnifrakturMaguntia', serif; font-size: 5rem; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+        .enter-btn { margin-top: 20px; background: transparent; color: #fff; border: 1px solid #fff; padding: 15px 40px; font-weight: 900; letter-spacing: 5px; cursor: pointer; backdrop-filter: blur(5px); }
 
-        /* BARRA LATERAL DEL CARRITO */
-        .cart-sidebar {
-            position: fixed; top: 0; right: -100%; width: 100%; max-width: 350px; height: 100%;
-            background: #000; z-index: 3000; transition: 0.4s; padding: 30px;
-            box-sizing: border-box; border-left: 1px solid #222;
-        }
+        /* CARRITO ICONO */
+        .cart-icon { position: fixed; top: 65px; right: 20px; z-index: 1100; background: #fff; color: #000; padding: 10px 15px; border-radius: 50px; font-weight: 900; cursor: pointer; font-size: 0.8rem; box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+
+        /* SIDEBAR CARRITO */
+        .cart-sidebar { position: fixed; top: 0; right: -100%; width: 100%; max-width: 350px; height: 100%; background: #050505; z-index: 3000; transition: 0.4s; padding: 30px; box-sizing: border-box; border-left: 1px solid #222; }
         .cart-sidebar.active { right: 0; }
         .cart-items { margin-top: 30px; max-height: 60vh; overflow-y: auto; }
-        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #111; padding-bottom: 10px; }
-        .cart-item-info { font-size: 0.7rem; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #111; padding-bottom: 10px; font-size: 0.7rem; }
 
-        /* BOTONES */
-        .btn-add-cart { background: #fff; color: #000; border: none; width: 100%; padding: 15px; font-weight: 900; border-radius: 8px; margin-bottom: 10px; cursor: pointer; }
-        .btn-checkout { background: #004481; color: #fff; border: none; width: 100%; padding: 15px; font-weight: 900; border-radius: 8px; cursor: pointer; display: block; text-decoration: none; text-align: center; }
-
-        /* (ESTILOS ANTERIORES SE MANTIENEN...) */
-        #intro-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 5000; transition: opacity 1.2s; background: rgba(0,0,0,0.5); }
-        .enter-btn { margin-top: 30px; background: rgba(255,255,255,0.1); color: #fff; border: 1px solid #fff; padding: 15px 45px; cursor: pointer; backdrop-filter: blur(5px); }
-        .announcement { background: #fff; color: #000; font-size: 0.6rem; padding: 10px; text-align: center; position: sticky; top: 0; z-index: 1000; font-weight: 900; }
+        /* TIENDA */
+        .announcement { background: #fff; color: #000; font-size: 0.6rem; padding: 10px; text-align: center; position: sticky; top: 0; z-index: 1000; font-weight: 900; letter-spacing: 2px; }
+        .hero { height: 40vh; display: flex; align-items: center; justify-content: center; text-align: center; }
         .nav-tabs { display: flex; justify-content: center; gap: 40px; padding: 25px 0; background: rgba(0,0,0,0.6); position: sticky; top: 35px; z-index: 900; backdrop-filter: blur(10px); }
         .tab-item { cursor: pointer; font-weight: 900; font-size: 0.7rem; color: #555; }
-        .tab-item.active { color: #fff; border-bottom: 2px solid #fff; }
-        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 10px; }
-        .product-card { background: rgba(0,0,0,0.4); border: 1px solid #111; cursor: pointer; position: relative; }
-        .product-card img { width: 100%; display: block; }
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; z-index: 2000; overflow-y: auto; }
-        .modal-content { padding: 25px; max-width: 450px; margin: 0 auto; }
-        .modal-img { width: 100%; margin-bottom: 20px; }
+        .tab-item.active { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 5px; }
+
+        /* GRID */
+        .container { padding: 20px 10px; max-width: 1200px; margin: 0 auto; }
+        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .product-card { background: rgba(0,0,0,0.4); border: 1px solid #111; position: relative; cursor: pointer; }
+        .product-card img { width: 100%; display: block; object-fit: contain; }
+        .stock-tag { position: absolute; top: 8px; left: 8px; background: red; font-size: 0.5rem; padding: 3px 6px; font-weight: 900; z-index: 5; }
+        .card-info { padding: 10px; text-align: center; font-size: 0.7rem; background: #000; font-weight: 900; }
+
+        /* MODAL */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; z-index: 4000; overflow-y: auto; }
+        .modal-content { padding: 25px; max-width: 450px; margin: 0 auto; box-sizing: border-box; }
+        .modal-img { width: 100%; margin-bottom: 20px; border-radius: 5px; }
+
+        /* BOTONES */
+        .btn-bbva { background: #004481; color: #fff; border: none; width: 100%; padding: 18px; font-weight: 900; border-radius: 12px; display: block; text-decoration: none; text-align: center; margin-bottom: 12px; box-sizing: border-box; font-size: 0.85rem; }
+        .btn-wa { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 15px; font-weight: 900; border-radius: 12px; cursor: pointer; box-sizing: border-box; }
+        .btn-add { background: #fff; color: #000; border: none; width: 100%; padding: 18px; font-weight: 900; border-radius: 12px; margin-bottom: 10px; cursor: pointer; }
+
+        footer { padding: 40px; text-align: center; color: #222; font-size: 0.5rem; }
     </style>
 </head>
 <body>
 
-    <div class="video-background"><video autoplay muted loop playsinline><source src="video_grax.mp4.mp4" type="video/mp4"></video></div>
+    <div class="video-background">
+        <video autoplay muted loop playsinline><source src="video_grax.mp4.mp4" type="video/mp4"></video>
+    </div>
 
     <div id="intro-screen">
-        <h1 style="font-family: 'UnifrakturMaguntia'; font-size: 5rem;">Grax</h1>
+        <h1 style="font-family: 'UnifrakturMaguntia';">Grax</h1>
         <button class="enter-btn" onclick="startStore()">Entrar</button>
     </div>
 
-    <div class="cart-icon" onclick="toggleCart()">
-        🛒 <span id="cart-count">0</span>
-    </div>
+    <div class="cart-icon" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
 
     <div id="cart-sidebar" class="cart-sidebar">
         <span style="font-size: 2rem; cursor: pointer;" onclick="toggleCart()">&times;</span>
-        <h2 style="font-family: 'UnifrakturMaguntia';">Tu Carrito</h2>
-        <div id="cart-items" class="cart-items">
-            </div>
-        <div style="margin-top: 20px;">
-            <p>Total: <span id="cart-total">$0</span> MXN</p>
-            <button class="btn-checkout" onclick="checkoutWA()">Finalizar Pedido</button>
+        <h2 style="font-family: 'UnifrakturMaguntia'; font-size: 2rem;">Carrito</h2>
+        <div id="cart-items" class="cart-items"></div>
+        <div style="border-top: 1px solid #222; padding-top: 20px;">
+            <p style="font-weight: 900;">Total: <span id="cart-total">$0</span> MXN</p>
+            <button class="btn-bbva" onclick="checkoutWA()">Finalizar pedido (WhatsApp)</button>
         </div>
     </div>
 
-    <div class="announcement">STOCK LIMITADO — ENVÍOS NACIONALES</div>
+    <div class="announcement">STOCK LIMITADO — ENVÍOS A TODO MÉXICO</div>
+
+    <div class="hero">
+        <h1 style="font-family: 'UnifrakturMaguntia'; font-size: 5rem;">Grax</h1>
+    </div>
 
     <div class="nav-tabs">
-        <div class="tab-item active" onclick="showCategory('prendas')">PRENDAS</div>
-        <div class="tab-item" onclick="showCategory('diseños')">DISEÑOS</div>
+        <div id="tab-prendas" class="tab-item active" onclick="showCategory('prendas')">PRENDAS</div>
+        <div id="tab-diseños" class="tab-item" onclick="showCategory('diseños')">DISEÑOS</div>
     </div>
 
-    <div class="products-grid" id="section-prendas">
-        <div class="product-card" onclick="openProduct('7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg', 'Premium Tee Black', 450)">
-            <img src="7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg">
-            <div class="card-info">$450 MXN</div>
+    <div class="container">
+        <div id="section-prendas" class="products-grid">
+            <div class="product-card" onclick="openProduct('7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg', 'Premium Tee Black', 450, 'SOLO 5 PIEZAS')">
+                <div class="stock-tag">SOLO 5 PIEZAS</div>
+                <img src="7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg">
+                <div class="card-info">$450 MXN</div>
+            </div>
+            <div class="product-card" onclick="openProduct('63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg', 'Logo Tee Grey', 450, 'DROP FINAL')">
+                <div class="stock-tag">DROP FINAL</div>
+                <img src="63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg">
+                <div class="card-info">$450 MXN</div>
+            </div>
+            <div class="product-card" onclick="openProduct('6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg', 'Studio Tee White', 450, '')">
+                <img src="6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg">
+                <div class="card-info">$450 MXN</div>
+            </div>
+            <div class="product-card" onclick="openProduct('7E33407F-C7DE-4065-8568-19B79A48809B.jpeg', 'Grax Signature', 450, '')">
+                <img src="7E33407F-C7DE-4065-8568-19B79A48809B.jpeg">
+                <div class="card-info">$450 MXN</div>
+            </div>
+            <div class="product-card" onclick="openProduct('EDC1E25D-01D1-454C-A254-A915941FB790.jpeg', 'Vintage Grax', 450, '')">
+                <img src="EDC1E25D-01D1-454C-A254-A915941FB790.jpeg">
+                <div class="card-info">$450 MXN</div>
+            </div>
         </div>
+
+        <div id="section-diseños" style="display:none; text-align: center;">
+            <div style="background: rgba(10,10,10,0.8); border: 1px dashed #444; padding: 40px; border-radius: 15px;">
+                <h2 style="font-family: 'UnifrakturMaguntia'; font-size: 2.5rem; margin:0;">Grax Vol. 1</h2>
+                <p style="color: #666; font-size: 0.7rem; letter-spacing: 3px;">PACK DIGITAL - 10 ASSETS</p>
+                <div style="font-size: 1.5rem; margin: 20px 0;">$200.00 MXN</div>
+                <button class="btn-bbva" style="max-width: 250px; margin: 0 auto;" onclick="openProduct('7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg', 'Pack Diseños Vol. 1', 200, 'DIGITAL')">Añadir al Carrito</button>
+            </div>
         </div>
+    </div>
 
     <div id="productModal" class="modal">
-        <span style="position:fixed; top:20px; right:20px; font-size:2.5rem; cursor:pointer;" onclick="closeProduct()">&times;</span>
+        <span style="position:fixed; top:20px; right:20px; font-size:3rem; cursor:pointer;" onclick="closeProduct()">&times;</span>
         <div class="modal-content">
             <img id="modalImg" class="modal-img">
-            <h2 id="modalTitle">PRODUCTO</h2>
-            <div id="modalPrice" style="font-size: 1.6rem; font-weight: 900; margin: 15px 0;">$450.00</div>
-            <select id="talla" style="width: 100%; background: #111; color: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+            <h2 id="modalTitle" style="margin:0;">PRODUCTO</h2>
+            <div id="modalPrice" style="font-size: 1.5rem; font-weight:900; margin:10px 0;">$0</div>
+            <label style="font-size: 0.6rem; color:#555;">TALLA:</label>
+            <select id="talla" style="width: 100%; background: #111; color: #fff; padding: 15px; border: 1px solid #333; border-radius: 8px; margin: 10px 0 20px;">
                 <option>S</option><option>M</option><option>L</option><option>XL</option>
             </select>
-            <button class="btn-add-cart" onclick="addToCart()">AÑADIR AL CARRITO</button>
-            <button style="background:transparent; color:#fff; border:1px solid #333; width:100%; padding:15px; border-radius:8px;" onclick="closeProduct()">VOLVER</button>
+            <button class="btn-add" onclick="addToCart()">Añadir al Carrito</button>
+            <button class="btn-wa" onclick="closeProduct()">Cerrar</button>
         </div>
     </div>
+
+    <footer>GRAX ESTUDIO © 2026</footer>
 
     <script>
         let cart = JSON.parse(localStorage.getItem('grax_cart')) || [];
         let currentProduct = {};
 
-        function startStore() { document.getElementById('intro-screen').style.opacity = '0'; setTimeout(() => { document.getElementById('intro-screen').style.display = 'none'; }, 1000); }
+        function startStore() {
+            document.getElementById('intro-screen').style.opacity = '0';
+            setTimeout(() => { document.getElementById('intro-screen').style.display = 'none'; }, 1000);
+        }
 
-        function openProduct(img, title, price) {
+        function showCategory(cat) {
+            document.getElementById('section-prendas').style.display = (cat === 'prendas' ? 'grid' : 'none');
+            document.getElementById('section-diseños').style.display = (cat === 'diseños' ? 'block' : 'none');
+            document.getElementById('tab-prendas').classList.toggle('active', cat === 'prendas');
+            document.getElementById('tab-diseños').classList.toggle('active', cat === 'diseños');
+        }
+
+        function openProduct(img, title, price, stock) {
             currentProduct = { img, title, price };
             document.getElementById('modalImg').src = img;
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalPrice').innerText = `$${price} MXN`;
             document.getElementById('productModal').style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeProduct() {
+            document.getElementById('productModal').style.display = "none";
+            document.body.style.overflow = "auto";
         }
 
         function addToCart() {
@@ -124,7 +179,7 @@
             cart.push({ ...currentProduct, talla });
             updateCart();
             closeProduct();
-            toggleCart(); // Abre el carrito para mostrar que se agregó
+            toggleCart();
         }
 
         function updateCart() {
@@ -133,17 +188,12 @@
             const container = document.getElementById('cart-items');
             container.innerHTML = '';
             let total = 0;
-            
             cart.forEach((item, index) => {
                 total += item.price;
-                container.innerHTML += `
-                    <div class="cart-item">
-                        <div class="cart-item-info">
-                            <b>${item.title}</b><br>Talla: ${item.talla}<br>$${item.price}
-                        </div>
-                        <span style="cursor:pointer; color:red;" onclick="removeItem(${index})">Eliminar</span>
-                    </div>
-                `;
+                container.innerHTML += `<div class="cart-item">
+                    <div><b>${item.title}</b><br>Talla: ${item.talla}</div>
+                    <div>$${item.price} <span style="color:red; margin-left:10px; cursor:pointer;" onclick="removeItem(${index})">X</span></div>
+                </div>`;
             });
             document.getElementById('cart-total').innerText = `$${total}`;
         }
@@ -158,18 +208,13 @@
         }
 
         function checkoutWA() {
-            if (cart.length === 0) return alert("El carrito está vacío");
-            let msg = "Hola GRAX! Quiero hacer un pedido:%0A";
-            cart.forEach(item => {
-                msg += `- ${item.title} (Talla: ${item.talla})%0A`;
-            });
+            if (cart.length === 0) return alert("Carrito vacío");
+            let msg = "Hola GRAX! Quiero estos productos:%0A";
+            cart.forEach(item => { msg += `- ${item.title} (${item.talla})%0A`; });
             msg += `%0ATotal: ${document.getElementById('cart-total').innerText}`;
             window.open(`https://wa.me/529984081516?text=${msg}`, '_blank');
         }
 
-        function closeProduct() { document.getElementById('productModal').style.display = "none"; }
-        
-        // Inicializar carrito al cargar
         updateCart();
     </script>
 </body>
