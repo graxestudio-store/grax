@@ -32,17 +32,23 @@
         /* TIENDA */
         .announcement { background: #fff; color: #000; font-size: 0.6rem; padding: 10px; text-align: center; position: sticky; top: 0; z-index: 1000; font-weight: 900; letter-spacing: 2px; }
         .hero { height: 40vh; display: flex; align-items: center; justify-content: center; text-align: center; }
-        .nav-tabs { display: flex; justify-content: center; gap: 40px; padding: 25px 0; background: rgba(0,0,0,0.6); position: sticky; top: 35px; z-index: 900; backdrop-filter: blur(10px); }
-        .tab-item { cursor: pointer; font-weight: 900; font-size: 0.7rem; color: #555; }
+        .nav-tabs { display: flex; justify-content: center; gap: 30px; padding: 25px 0; background: rgba(0,0,0,0.6); position: sticky; top: 35px; z-index: 900; backdrop-filter: blur(10px); }
+        .tab-item { cursor: pointer; font-weight: 900; font-size: 0.7rem; color: #555; transition: 0.3s; }
         .tab-item.active { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 5px; }
+        .tab-item:hover { color: #fff; }
 
         /* GRID */
-        .container { padding: 20px 10px; max-width: 1200px; margin: 0 auto; }
+        .container { padding: 20px 10px; max-width: 1200px; margin: 0 auto; min-height: 50vh; }
         .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         .product-card { background: rgba(0,0,0,0.4); border: 1px solid #111; position: relative; cursor: pointer; }
         .product-card img { width: 100%; display: block; object-fit: contain; }
         .stock-tag { position: absolute; top: 8px; left: 8px; background: red; font-size: 0.5rem; padding: 3px 6px; font-weight: 900; z-index: 5; }
         .card-info { padding: 10px; text-align: center; font-size: 0.7rem; background: #000; font-weight: 900; }
+
+        /* SECCIÓN REDES */
+        .social-links-container { text-align: center; padding: 40px 20px; }
+        .social-link-card { display: block; background: #111; border: 1px solid #222; padding: 20px; margin-bottom: 15px; text-decoration: none; color: #fff; font-weight: 900; border-radius: 8px; transition: 0.3s; }
+        .social-link-card:hover { background: #fff; color: #000; transform: translateY(-3px); }
 
         /* MODAL */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; z-index: 4000; overflow-y: auto; }
@@ -54,7 +60,11 @@
         .btn-wa { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 15px; font-weight: 900; border-radius: 12px; cursor: pointer; box-sizing: border-box; }
         .btn-add { background: #fff; color: #000; border: none; width: 100%; padding: 18px; font-weight: 900; border-radius: 12px; margin-bottom: 10px; cursor: pointer; }
 
-        footer { padding: 40px; text-align: center; color: #222; font-size: 0.5rem; }
+        footer { padding: 60px 40px; text-align: center; border-top: 1px solid #111; margin-top: 50px; }
+        .footer-socials { margin-bottom: 20px; display: flex; justify-content: center; gap: 20px; }
+        .footer-socials a { color: #444; text-decoration: none; font-size: 0.7rem; font-weight: 900; transition: 0.3s; }
+        .footer-socials a:hover { color: #fff; }
+        .copyright { color: #222; font-size: 0.5rem; letter-spacing: 2px; }
     </style>
 </head>
 <body>
@@ -89,6 +99,7 @@
     <div class="nav-tabs">
         <div id="tab-prendas" class="tab-item active" onclick="showCategory('prendas')">PRENDAS</div>
         <div id="tab-diseños" class="tab-item" onclick="showCategory('diseños')">DISEÑOS</div>
+        <div id="tab-redes" class="tab-item" onclick="showCategory('redes')">REDES</div>
     </div>
 
     <div class="container">
@@ -125,6 +136,15 @@
                 <button class="btn-bbva" style="max-width: 250px; margin: 0 auto;" onclick="openProduct('7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg', 'Pack Diseños Vol. 1', 200, 'DIGITAL')">Añadir al Carrito</button>
             </div>
         </div>
+
+        <div id="section-redes" style="display:none;">
+            <div class="social-links-container">
+                <h2 style="font-family: 'UnifrakturMaguntia'; margin-bottom: 30px;">Conecta con Grax</h2>
+                <a href="https://www.instagram.com/grax_estudio/" target="_blank" class="social-link-card">INSTAGRAM</a>
+                <a href="https://www.tiktok.com/@grax_estudio" target="_blank" class="social-link-card">TIKTOK</a>
+                <a href="https://wa.me/529984081516" target="_blank" class="social-link-card">WHATSAPP DIRECTO</a>
+            </div>
+        </div>
     </div>
 
     <div id="productModal" class="modal">
@@ -142,7 +162,14 @@
         </div>
     </div>
 
-    <footer>GRAX ESTUDIO © 2026</footer>
+    <footer>
+        <div class="footer-socials">
+            <a href="https://www.instagram.com/grax_estudio/" target="_blank">IG</a>
+            <a href="https://www.tiktok.com/@grax_estudio" target="_blank">TK</a>
+            <a href="https://wa.me/529984081516" target="_blank">WA</a>
+        </div>
+        <div class="copyright">GRAX ESTUDIO © 2026 — ALL RIGHTS RESERVED</div>
+    </footer>
 
     <script>
         let cart = JSON.parse(localStorage.getItem('grax_cart')) || [];
@@ -154,10 +181,27 @@
         }
 
         function showCategory(cat) {
-            document.getElementById('section-prendas').style.display = (cat === 'prendas' ? 'grid' : 'none');
-            document.getElementById('section-diseños').style.display = (cat === 'diseños' ? 'block' : 'none');
-            document.getElementById('tab-prendas').classList.toggle('active', cat === 'prendas');
-            document.getElementById('tab-diseños').classList.toggle('active', cat === 'diseños');
+            // Ocultar todas las secciones
+            document.getElementById('section-prendas').style.display = 'none';
+            document.getElementById('section-diseños').style.display = 'none';
+            document.getElementById('section-redes').style.display = 'none';
+            
+            // Quitar clase active de todos los tabs
+            document.getElementById('tab-prendas').classList.remove('active');
+            document.getElementById('tab-diseños').classList.remove('active');
+            document.getElementById('tab-redes').classList.remove('active');
+
+            // Mostrar sección elegida
+            if(cat === 'prendas') {
+                document.getElementById('section-prendas').style.display = 'grid';
+                document.getElementById('tab-prendas').classList.add('active');
+            } else if(cat === 'diseños') {
+                document.getElementById('section-diseños').style.display = 'block';
+                document.getElementById('tab-diseños').classList.add('active');
+            } else if(cat === 'redes') {
+                document.getElementById('section-redes').style.display = 'block';
+                document.getElementById('tab-redes').classList.add('active');
+            }
         }
 
         function openProduct(img, title, price, stock) {
