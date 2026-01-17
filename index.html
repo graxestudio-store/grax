@@ -7,46 +7,10 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Inter:wght@400;700;900&display=swap');
 
-        /* INTRO DE PANTALLA COMPLETA */
-        #intro-screen {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: #000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 5000;
-            transition: opacity 1s ease-out;
-        }
-        #intro-screen h1 {
-            font-family: 'UnifrakturMaguntia', serif;
-            font-size: 5rem;
-            color: #fff;
-            margin: 0;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { opacity: 0.3; }
-            50% { opacity: 1; }
-            100% { opacity: 0.3; }
-        }
-        .enter-btn {
-            margin-top: 30px;
-            background: transparent;
-            color: #fff;
-            border: 1px solid #fff;
-            padding: 10px 30px;
-            font-weight: 900;
-            letter-spacing: 5px;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-
-        /* BASE DE LA TIENDA */
+        /* BASE */
         body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; text-transform: uppercase; overflow-x: hidden; }
-        
+
+        /* VIDEO DE FONDO UNIVERSAL */
         .video-background {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1; overflow: hidden; background: #000;
@@ -54,46 +18,71 @@
         .video-background video {
             min-width: 100%; min-height: 100%; width: auto; height: auto;
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            filter: brightness(25%) grayscale(100%);
+            filter: brightness(30%) grayscale(100%);
         }
 
+        /* PANTALLA DE ENTRADA (INTRO) */
+        #intro-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 5000; transition: opacity 1.2s ease-in-out; background: rgba(0,0,0,0.4);
+        }
+        #intro-screen h1 {
+            font-family: 'UnifrakturMaguntia', serif;
+            font-size: clamp(4rem, 18vw, 8rem);
+            animation: pulse 2s infinite;
+            margin: 0;
+            text-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+
+        .enter-btn {
+            margin-top: 30px; background: rgba(255,255,255,0.1); color: #fff;
+            border: 1px solid #fff; padding: 15px 45px; font-weight: 900;
+            letter-spacing: 5px; cursor: pointer; backdrop-filter: blur(5px);
+            transition: 0.3s; border-radius: 4px;
+        }
+        .enter-btn:hover { background: #fff; color: #000; }
+
+        /* TIENDA */
         .announcement { background: rgba(255, 255, 255, 0.9); color: #000; font-size: 0.6rem; padding: 10px; font-weight: 900; letter-spacing: 2px; text-align: center; position: sticky; top: 0; z-index: 1000; }
-
-        .hero { height: 45vh; display: flex; align-items: center; justify-content: center; text-align: center; }
-        .hero h1 { font-family: 'UnifrakturMaguntia', serif; font-size: clamp(4rem, 15vw, 7rem); margin: 0; }
-
+        .hero { height: 40vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+        
         .nav-tabs { display: flex; justify-content: center; gap: 40px; padding: 25px 0; background: rgba(0,0,0,0.6); border-bottom: 1px solid #222; position: sticky; top: 35px; z-index: 900; backdrop-filter: blur(10px); }
-        .tab-item { cursor: pointer; font-weight: 900; font-size: 0.7rem; color: #555; }
+        .tab-item { cursor: pointer; font-weight: 900; font-size: 0.7rem; color: #555; letter-spacing: 2px; }
         .tab-item.active { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 5px; }
 
         .container { padding: 20px 10px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
 
-        /* PRODUCTOS */
+        /* PRODUCTOS Y STOCK */
         .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         .product-card { background: rgba(0, 0, 0, 0.4); border: 1px solid #111; cursor: pointer; position: relative; overflow: hidden; }
-        .stock-tag { position: absolute; top: 10px; left: 10px; background: #ff0000; color: #fff; font-size: 0.5rem; padding: 4px 8px; font-weight: 900; z-index: 2; }
+        .stock-tag { position: absolute; top: 10px; left: 10px; background: #ff0000; color: #fff; font-size: 0.5rem; padding: 4px 8px; font-weight: 900; z-index: 2; border-radius: 2px; }
         .product-card img { width: 100%; height: auto; display: block; object-fit: contain; }
         .card-info { padding: 12px; text-align: center; font-size: 0.7rem; font-weight: 900; background: #000; }
 
-        /* BOTONES MODAL CORREGIDOS */
+        /* SECCIÓN DISEÑOS */
+        #section-diseños { display: none; padding: 40px 0; }
+        .digital-card { background: rgba(10, 10, 10, 0.8); border: 1px dashed #444; max-width: 400px; margin: 0 auto; border-radius: 15px; text-align: center; backdrop-filter: blur(10px); padding: 40px 20px; }
+
+        /* MODAL Y BOTONES */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; z-index: 2000; overflow-y: auto; }
         .modal-content { padding: 25px; max-width: 450px; margin: 0 auto; box-sizing: border-box; }
         .modal-img { width: 100%; border-radius: 4px; margin-bottom: 20px; }
+        
         .btn-bbva { 
             background: #004481; color: #fff; border: none; width: 100%; 
             padding: 18px 10px; font-weight: 900; border-radius: 12px; 
             display: block; text-decoration: none; text-align: center; 
             margin-bottom: 12px; box-sizing: border-box; font-size: 0.85rem;
+            transition: 0.3s;
         }
         .btn-wa { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 15px; font-weight: 900; border-radius: 12px; box-sizing: border-box; cursor: pointer; }
+
+        footer { padding: 40px; text-align: center; color: #222; font-size: 0.5rem; letter-spacing: 3px; }
     </style>
 </head>
 <body>
-
-    <div id="intro-screen">
-        <h1>Grax</h1>
-        <button class="enter-btn" onclick="startStore()">Entrar</button>
-    </div>
 
     <div class="video-background">
         <video autoplay muted loop playsinline>
@@ -101,65 +90,113 @@
         </video>
     </div>
 
-    <div class="announcement">STOCK LIMITADO — ENVÍOS A TODO MÉXICO</div>
-
-    <section class="hero">
-        <div><h1>Grax</h1></div>
-    </section>
-
-    <div class="nav-tabs">
-        <div class="tab-item active" id="tab-prendas" onclick="showCategory('prendas')">PRENDAS</div>
-        <div class="tab-item" id="tab-diseños" onclick="showCategory('diseños')">DISEÑOS</div>
+    <div id="intro-screen">
+        <h1>Grax</h1>
+        <button class="enter-btn" onclick="startStore()">Entrar</button>
     </div>
 
-    <div class="container">
-        <div id="section-prendas" class="products-grid">
-            <div class="product-card" onclick="openProduct('7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg')">
-                <div class="stock-tag">SOLO 5 PIEZAS</div>
-                <img src="7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg">
-                <div class="card-info">$450 MXN</div>
+    <div id="main-content">
+        <div class="announcement">ENVÍOS NACIONALES — STOCK LIMITADO</div>
+
+        <section class="hero">
+            <h1 style="font-family: 'UnifrakturMaguntia'; font-size: clamp(3rem, 10vw, 5rem);">Grax</h1>
+        </section>
+
+        <div class="nav-tabs">
+            <div class="tab-item active" id="tab-prendas" onclick="showCategory('prendas')">PRENDAS</div>
+            <div class="tab-item" id="tab-diseños" onclick="showCategory('diseños')">DISEÑOS</div>
+        </div>
+
+        <div class="container">
+            <div id="section-prendas" class="products-grid">
+                <div class="product-card" onclick="openProduct('7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg')">
+                    <div class="stock-tag">SOLO 5 PIEZAS</div>
+                    <img src="7E96394D-B191-43E5-A326-705E3D8D6E0E.jpeg">
+                    <div class="card-info">$450 MXN</div>
+                </div>
+                <div class="product-card" onclick="openProduct('63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg')">
+                    <div class="stock-tag">DROP FINAL</div>
+                    <img src="63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg">
+                    <div class="card-info">$450 MXN</div>
+                </div>
+                <div class="product-card" onclick="openProduct('6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg')">
+                    <img src="6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg">
+                    <div class="card-info">$450 MXN</div>
+                </div>
+                <div class="product-card" onclick="openProduct('7E33407F-C7DE-4065-8568-19B79A48809B.jpeg')">
+                    <img src="7E33407F-C7DE-4065-8568-19B79A48809B.jpeg">
+                    <div class="card-info">$450 MXN</div>
+                </div>
+                <div class="product-card" onclick="openProduct('EDC1E25D-01D1-454C-A254-A915941FB790.jpeg')">
+                    <img src="EDC1E25D-01D1-454C-A254-A915941FB790.jpeg">
+                    <div class="card-info">$450 MXN</div>
+                </div>
             </div>
-            <div class="product-card" onclick="openProduct('63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg')">
-                <div class="stock-tag">ULTIMAS PIEZAS</div>
-                <img src="63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg">
-                <div class="card-info">$450 MXN</div>
+
+            <div id="section-diseños">
+                <div class="digital-card">
+                    <h2 style="font-family: 'UnifrakturMaguntia'; font-size: 2.5rem; margin:0;">Grax Vol. 1</h2>
+                    <p style="font-size: 0.6rem; letter-spacing: 4px; color: #555; margin-bottom: 20px;">PACK DIGITAL</p>
+                    <p style="font-size: 0.7rem; color: #888; margin-bottom: 30px;">10 GRÁFICOS STREETWEAR EXCLUSIVOS.</p>
+                    <div style="font-size: 1.8rem; font-weight: 900; margin-bottom: 30px;">$200.00 MXN</div>
+                    <a href="#" class="btn-bbva" style="max-width:280px; margin:0 auto;">COMPRAR PACK</a>
+                </div>
             </div>
-            </div>
+        </div>
     </div>
 
     <div id="productModal" class="modal">
+        <span style="position:fixed; top:20px; right:20px; font-size:2.5rem; cursor:pointer; z-index:2200;" onclick="closeProduct()">&times;</span>
         <div class="modal-content">
-            <span style="float:right; font-size: 2rem; cursor:pointer;" onclick="closeProduct()">&times;</span>
             <img id="modalImg" class="modal-img" src="">
             <h2 style="margin: 0; font-size: 1.4rem;">PREMIUM TEE</h2>
             <div style="font-size: 1.6rem; font-weight: 900; margin: 15px 0;">$450.00 MXN</div>
+            <select id="talla" style="width: 100%; background: #111; color: #fff; padding: 15px; border: 1px solid #333; border-radius: 8px; margin-bottom: 20px; box-sizing: border-box;">
+                <option>S</option><option>M</option><option>L</option><option>XL</option>
+            </select>
             <a href="#" class="btn-bbva">PAGAR CON BBVA</a>
             <button class="btn-wa" onclick="enviarWA()">WHATSAPP</button>
         </div>
     </div>
 
+    <footer>GRAX ESTUDIO © 2026</footer>
+
     <script>
-        // Función para quitar el Intro
         function startStore() {
             const intro = document.getElementById('intro-screen');
             intro.style.opacity = '0';
-            setTimeout(() => {
-                intro.style.display = 'none';
-            }, 1000);
+            setTimeout(() => { intro.style.display = 'none'; }, 1200);
         }
 
         function showCategory(cat) {
-            document.getElementById('section-prendas').style.display = (cat === 'prendas' ? 'grid' : 'none');
-            document.getElementById('tab-prendas').classList.toggle('active', cat === 'prendas');
+            const prendas = document.getElementById('section-prendas');
+            const diseños = document.getElementById('section-diseños');
+            const tabP = document.getElementById('tab-prendas');
+            const tabD = document.getElementById('tab-diseños');
+
+            if(cat === 'prendas') {
+                prendas.style.display = 'grid'; diseños.style.display = 'none';
+                tabP.classList.add('active'); tabD.classList.remove('active');
+            } else {
+                prendas.style.display = 'none'; diseños.style.display = 'block';
+                tabP.classList.remove('active'); tabD.classList.add('active');
+            }
         }
+
         function openProduct(img) {
             document.getElementById('modalImg').src = img;
             document.getElementById('productModal').style.display = "block";
             document.body.style.overflow = "hidden";
         }
+
         function closeProduct() {
             document.getElementById('productModal').style.display = "none";
             document.body.style.overflow = "auto";
+        }
+
+        function enviarWA() {
+            const t = document.getElementById('talla').value;
+            window.open(`https://wa.me/529984081516?text=Hola! Quiero la playera en talla ${t}`, '_blank');
         }
     </script>
 </body>
