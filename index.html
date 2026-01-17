@@ -7,10 +7,46 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Inter:wght@400;700;900&display=swap');
 
-        /* BASE */
+        /* INTRO DE PANTALLA COMPLETA */
+        #intro-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 5000;
+            transition: opacity 1s ease-out;
+        }
+        #intro-screen h1 {
+            font-family: 'UnifrakturMaguntia', serif;
+            font-size: 5rem;
+            color: #fff;
+            margin: 0;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+        .enter-btn {
+            margin-top: 30px;
+            background: transparent;
+            color: #fff;
+            border: 1px solid #fff;
+            padding: 10px 30px;
+            font-weight: 900;
+            letter-spacing: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        /* BASE DE LA TIENDA */
         body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; text-transform: uppercase; overflow-x: hidden; }
         
-        /* VIDEO DE FONDO */
         .video-background {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1; overflow: hidden; background: #000;
@@ -23,7 +59,7 @@
 
         .announcement { background: rgba(255, 255, 255, 0.9); color: #000; font-size: 0.6rem; padding: 10px; font-weight: 900; letter-spacing: 2px; text-align: center; position: sticky; top: 0; z-index: 1000; }
 
-        .hero { height: 45vh; display: flex; align-items: center; justify-content: center; text-align: center; background: transparent; }
+        .hero { height: 45vh; display: flex; align-items: center; justify-content: center; text-align: center; }
         .hero h1 { font-family: 'UnifrakturMaguntia', serif; font-size: clamp(4rem, 15vw, 7rem); margin: 0; }
 
         .nav-tabs { display: flex; justify-content: center; gap: 40px; padding: 25px 0; background: rgba(0,0,0,0.6); border-bottom: 1px solid #222; position: sticky; top: 35px; z-index: 900; backdrop-filter: blur(10px); }
@@ -32,48 +68,32 @@
 
         .container { padding: 20px 10px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
 
-        /* GRID PRODUCTOS */
+        /* PRODUCTOS */
         .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         .product-card { background: rgba(0, 0, 0, 0.4); border: 1px solid #111; cursor: pointer; position: relative; overflow: hidden; }
-        
-        /* ETIQUETA DE STOCK LIMITADO */
-        .stock-tag { position: absolute; top: 10px; left: 10px; background: #ff0000; color: #fff; font-size: 0.5rem; padding: 4px 8px; font-weight: 900; z-index: 2; border-radius: 2px; letter-spacing: 1px; }
-
+        .stock-tag { position: absolute; top: 10px; left: 10px; background: #ff0000; color: #fff; font-size: 0.5rem; padding: 4px 8px; font-weight: 900; z-index: 2; }
         .product-card img { width: 100%; height: auto; display: block; object-fit: contain; }
         .card-info { padding: 12px; text-align: center; font-size: 0.7rem; font-weight: 900; background: #000; }
 
-        /* MODAL */
+        /* BOTONES MODAL CORREGIDOS */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; z-index: 2000; overflow-y: auto; }
-        .modal-content { padding: 25px; max-width: 450px; margin: 0 auto; box-sizing: border-box; } /* box-sizing evita que se salga el contenido */
-        .close-modal { position: fixed; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; z-index: 2100; }
-        .modal-img { width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px; }
-        
-        /* BOTÓN AZUL CORREGIDO */
+        .modal-content { padding: 25px; max-width: 450px; margin: 0 auto; box-sizing: border-box; }
+        .modal-img { width: 100%; border-radius: 4px; margin-bottom: 20px; }
         .btn-bbva { 
-            background: #004481; 
-            color: #fff; 
-            border: none; 
-            width: 100%; 
-            padding: 18px 10px; /* Ajuste interno */
-            font-weight: 900; 
-            border-radius: 12px; 
-            cursor: pointer; 
-            display: block; 
-            text-decoration: none; 
-            text-align: center; 
-            margin-bottom: 12px; 
-            box-sizing: border-box; /* Esto hace que el padding no lo ensanche */
-            transition: 0.3s;
-            font-size: 0.85rem;
+            background: #004481; color: #fff; border: none; width: 100%; 
+            padding: 18px 10px; font-weight: 900; border-radius: 12px; 
+            display: block; text-decoration: none; text-align: center; 
+            margin-bottom: 12px; box-sizing: border-box; font-size: 0.85rem;
         }
-        .btn-bbva:active { transform: scale(0.98); background: #003366; }
-
-        .btn-wa { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 15px; font-weight: 900; border-radius: 12px; cursor: pointer; box-sizing: border-box; }
-
-        footer { padding: 40px; text-align: center; color: #222; font-size: 0.5rem; }
+        .btn-wa { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 15px; font-weight: 900; border-radius: 12px; box-sizing: border-box; cursor: pointer; }
     </style>
 </head>
 <body>
+
+    <div id="intro-screen">
+        <h1>Grax</h1>
+        <button class="enter-btn" onclick="startStore()">Entrar</button>
+    </div>
 
     <div class="video-background">
         <video autoplay muted loop playsinline>
@@ -100,58 +120,37 @@
                 <div class="card-info">$450 MXN</div>
             </div>
             <div class="product-card" onclick="openProduct('63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg')">
-                <div class="stock-tag">DROP FINAL</div>
+                <div class="stock-tag">ULTIMAS PIEZAS</div>
                 <img src="63CFF2F9-7007-4BD3-AD6A-F5CD294BE5D4.jpeg">
                 <div class="card-info">$450 MXN</div>
             </div>
-            <div class="product-card" onclick="openProduct('6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg')">
-                <img src="6A8D34E7-6D62-4830-A864-16115BA8570F.jpeg">
-                <div class="card-info">$450 MXN</div>
             </div>
-            <div class="product-card" onclick="openProduct('7E33407F-C7DE-4065-8568-19B79A48809B.jpeg')">
-                <img src="7E33407F-C7DE-4065-8568-19B79A48809B.jpeg">
-                <div class="card-info">$450 MXN</div>
-            </div>
-            <div class="product-card" onclick="openProduct('EDC1E25D-01D1-454C-A254-A915941FB790.jpeg')">
-                <img src="EDC1E25D-01D1-454C-A254-A915941FB790.jpeg">
-                <div class="card-info">$450 MXN</div>
-            </div>
-        </div>
-
-        <div id="section-diseños" style="display:none;">
-            <div style="background: rgba(10,10,10,0.8); border: 1px dashed #444; padding: 40px; text-align: center; border-radius: 15px;">
-                <h2 style="font-family: 'UnifrakturMaguntia'; font-size: 2rem;">PACK VOL. 1</h2>
-                <p style="color: #666; font-size: 0.7rem;">10 ASSETS DIGITALES</p>
-                <div style="font-size: 1.5rem; margin: 20px 0;">$200.00 MXN</div>
-                <a href="#" class="btn-bbva" style="max-width: 250px; margin: 0 auto;">ADQUIRIR PACK</a>
-            </div>
-        </div>
     </div>
 
     <div id="productModal" class="modal">
-        <span class="close-modal" onclick="closeProduct()">&times;</span>
         <div class="modal-content">
+            <span style="float:right; font-size: 2rem; cursor:pointer;" onclick="closeProduct()">&times;</span>
             <img id="modalImg" class="modal-img" src="">
-            <div style="font-size: 0.6rem; color: #555; margin-bottom: 5px;">ESTUDIO 2026</div>
             <h2 style="margin: 0; font-size: 1.4rem;">PREMIUM TEE</h2>
             <div style="font-size: 1.6rem; font-weight: 900; margin: 15px 0;">$450.00 MXN</div>
-            
-            <p style="font-size: 0.5rem; color: #444;">TALLA:</p>
-            <select id="talla" style="width: 100%; background: #111; color: #fff; padding: 15px; border: 1px solid #333; border-radius: 8px; margin-bottom: 20px; box-sizing: border-box;">
-                <option>S</option><option>M</option><option>L</option><option>XL</option>
-            </select>
-
             <a href="#" class="btn-bbva">PAGAR CON BBVA</a>
-            <button class="btn-wa" onclick="enviarWA()">CONSULTAR WHATSAPP</button>
+            <button class="btn-wa" onclick="enviarWA()">WHATSAPP</button>
         </div>
     </div>
 
     <script>
+        // Función para quitar el Intro
+        function startStore() {
+            const intro = document.getElementById('intro-screen');
+            intro.style.opacity = '0';
+            setTimeout(() => {
+                intro.style.display = 'none';
+            }, 1000);
+        }
+
         function showCategory(cat) {
             document.getElementById('section-prendas').style.display = (cat === 'prendas' ? 'grid' : 'none');
-            document.getElementById('section-diseños').style.display = (cat === 'diseños' ? 'block' : 'none');
             document.getElementById('tab-prendas').classList.toggle('active', cat === 'prendas');
-            document.getElementById('tab-diseños').classList.toggle('active', cat === 'diseños');
         }
         function openProduct(img) {
             document.getElementById('modalImg').src = img;
@@ -161,10 +160,6 @@
         function closeProduct() {
             document.getElementById('productModal').style.display = "none";
             document.body.style.overflow = "auto";
-        }
-        function enviarWA() {
-            const t = document.getElementById('talla').value;
-            window.open(`https://wa.me/529984081516?text=Me interesa la playera en talla ${t}`, '_blank');
         }
     </script>
 </body>
